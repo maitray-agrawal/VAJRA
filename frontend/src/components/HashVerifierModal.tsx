@@ -84,40 +84,22 @@ export const HashVerifierModal: React.FC<HashVerifierModalProps> = ({
 
   return (
     <div
-      className="modal-backdrop"
+      className="modal-overlay"
       onClick={onClose}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'rgba(5, 10, 20, 0.88)',
-        backdropFilter: 'blur(8px)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 99999
-      }}
     >
       <div
         className="modal-card"
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: 'var(--bg-card)',
-          border: '1px solid var(--border-color)',
-          borderRadius: '12px',
-          width: '90%',
-          maxWidth: '750px',
-          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.7)',
-          overflow: 'hidden'
+          maxWidth: '720px',
+          padding: 0
         }}
       >
         {/* Header */}
         <div
           style={{
-            background: 'linear-gradient(90deg, rgba(16, 185, 129, 0.15), rgba(15, 23, 42, 0.95))',
-            padding: '1.15rem 1.5rem',
+            backgroundColor: 'var(--bg-surface-secondary)',
+            padding: '1.25rem 1.5rem',
             borderBottom: '1px solid var(--border-color)',
             display: 'flex',
             justifyContent: 'space-between',
@@ -125,10 +107,10 @@ export const HashVerifierModal: React.FC<HashVerifierModalProps> = ({
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <span style={{ color: 'var(--accent-cyan)' }}><LockIcon size={20} /></span>
+            <span style={{ color: 'var(--accent-primary)' }}><LockIcon size={18} /></span>
             <div>
-              <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#fff', fontWeight: 700 }}>
-                SHA-256 Cryptographic Hash Inspector
+              <h3 style={{ margin: 0, fontSize: '1rem', color: 'var(--text-bright)', fontWeight: 600 }}>
+                SHA-256 Decision Hash Inspector
               </h3>
               <p style={{ margin: '0.1rem 0 0 0', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                 Client-side Web Crypto API Verification Engine • Block {selectedLog.id}
@@ -138,22 +120,22 @@ export const HashVerifierModal: React.FC<HashVerifierModalProps> = ({
           <button
             onClick={onClose}
             className="btn btn-outline"
-            style={{ padding: '0.35rem 0.6rem', fontSize: '0.8rem', borderColor: 'transparent', color: 'var(--text-muted)' }}
+            style={{ height: '30px', padding: '0 0.5rem', color: 'var(--text-muted)' }}
           >
             <XIcon size={16} />
           </button>
         </div>
 
         {/* Content Body */}
-        <div style={{ padding: '1.25rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '1.25rem', maxHeight: '80vh', overflowY: 'auto' }}>
+        <div style={{ padding: '1.25rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: '75vh', overflowY: 'auto' }}>
           {/* Section 1: Parent Block Reference */}
-          <div style={{ background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '0.85rem 1rem' }}>
+          <div style={{ backgroundColor: 'var(--bg-surface-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', padding: '0.85rem 1rem' }}>
             <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-              <LayersIcon size={13} color="var(--accent-cyan)" /> PARENT BLOCK (H<sub>n-1</sub>)
+              <LayersIcon size={13} color="var(--accent-primary)" /> PARENT BLOCK (H<sub>n-1</sub>)
             </div>
             {isGenesis ? (
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span className="badge" style={{ fontSize: '0.68rem', background: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa', borderColor: 'rgba(59, 130, 246, 0.4)' }}>
+                <span className="badge" style={{ fontSize: '0.68rem', background: 'rgba(56, 189, 248, 0.12)', color: 'var(--accent-primary)', borderColor: 'var(--border-strong)' }}>
                   GENESIS BLOCK (ROOT ANCHOR)
                 </span>
                 <span className="mono" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
@@ -162,12 +144,12 @@ export const HashVerifierModal: React.FC<HashVerifierModalProps> = ({
               </div>
             ) : (
               <div>
-                <div className="mono" style={{ fontSize: '0.8rem', color: '#93c5fd', wordBreak: 'break-all' }}>
+                <div className="mono" style={{ fontSize: '0.8rem', color: 'var(--text-primary)', wordBreak: 'break-all' }}>
                   {selectedLog.previous_hash}
                 </div>
                 {parentLog && (
-                  <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)', marginTop: '0.3rem' }}>
-                    Linked to Block: <span className="mono" style={{ color: 'var(--accent-cyan)' }}>{parentLog.id}</span> ({parentLog.action_type})
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '0.3rem' }}>
+                    Linked to Block: <span className="mono" style={{ color: 'var(--accent-primary)' }}>{parentLog.id}</span> ({parentLog.action_type})
                   </div>
                 )}
               </div>
@@ -175,44 +157,44 @@ export const HashVerifierModal: React.FC<HashVerifierModalProps> = ({
           </div>
 
           {/* Section 2: Current Block Invariant */}
-          <div style={{ background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '0.85rem 1rem' }}>
-            <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-              <CpuIcon size={13} color="var(--accent-cyan)" /> CURRENT BLOCK (H<sub>n</sub>)
+          <div style={{ backgroundColor: 'var(--bg-surface-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', padding: '0.85rem 1rem' }}>
+            <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+              <CpuIcon size={13} color="var(--accent-primary)" /> CURRENT BLOCK (H<sub>n</sub>)
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.5rem', marginBottom: '0.6rem', fontSize: '0.75rem' }}>
               <div>
-                <span style={{ color: 'var(--text-dim)' }}>Block ID:</span>
-                <div className="mono" style={{ color: '#fff', fontWeight: 600 }}>{selectedLog.id}</div>
+                <span style={{ color: 'var(--text-muted)' }}>Block ID:</span>
+                <div className="mono" style={{ color: 'var(--text-bright)', fontWeight: 600 }}>{selectedLog.id}</div>
               </div>
               <div>
-                <span style={{ color: 'var(--text-dim)' }}>Action:</span>
-                <div className="mono" style={{ color: 'var(--accent-cyan)', fontWeight: 600 }}>{selectedLog.action_type}</div>
+                <span style={{ color: 'var(--text-muted)' }}>Action:</span>
+                <div className="mono" style={{ color: 'var(--accent-primary)', fontWeight: 600 }}>{selectedLog.action_type}</div>
               </div>
               <div>
-                <span style={{ color: 'var(--text-dim)' }}>Actor:</span>
-                <div className="mono" style={{ color: '#f59e0b', fontWeight: 600 }}>{selectedLog.actor_type}:{selectedLog.actor_id}</div>
+                <span style={{ color: 'var(--text-muted)' }}>Actor:</span>
+                <div className="mono" style={{ color: 'var(--status-warning)', fontWeight: 600 }}>{selectedLog.actor_type}:{selectedLog.actor_id}</div>
               </div>
               <div>
-                <span style={{ color: 'var(--text-dim)' }}>Timestamp:</span>
-                <div className="mono" style={{ color: 'var(--text-bright)' }}>{new Date(selectedLog.timestamp).toISOString()}</div>
+                <span style={{ color: 'var(--text-muted)' }}>Timestamp:</span>
+                <div className="mono" style={{ color: 'var(--text-main)' }}>{new Date(selectedLog.timestamp).toISOString()}</div>
               </div>
             </div>
 
-            <div style={{ fontSize: '0.72rem', color: 'var(--text-dim)', marginBottom: '0.2rem' }}>Stored Canonical Hash:</div>
-            <div className="mono" style={{ fontSize: '0.8rem', color: '#4ade80', wordBreak: 'break-all', background: 'rgba(0,0,0,0.3)', padding: '0.4rem 0.6rem', borderRadius: '4px', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginBottom: '0.2rem' }}>Stored Canonical Hash:</div>
+            <div className="mono" style={{ fontSize: '0.78rem', color: 'var(--status-normal)', wordBreak: 'break-all', backgroundColor: 'var(--bg-surface)', padding: '0.4rem 0.6rem', borderRadius: '4px', border: '1px solid var(--border-color)' }}>
               {selectedLog.current_hash}
             </div>
           </div>
 
           {/* Section 3: Interactive Canonical Payload Verifier */}
-          <div style={{ background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '0.85rem 1rem' }}>
+          <div style={{ backgroundColor: 'var(--bg-surface-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', padding: '0.85rem 1rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent-cyan)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+              <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--accent-primary)', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                 <FileTextIcon size={13} /> VERIFICATION FORMULA & CANONICAL PAYLOAD
               </div>
               <button
                 className="btn btn-outline"
-                style={{ fontSize: '0.7rem', padding: '0.2rem 0.5rem' }}
+                style={{ height: '26px', fontSize: '0.7rem', padding: '0 0.5rem' }}
                 onClick={() => {
                   setEditablePayload(canonicalPayload);
                   performVerification(canonicalPayload);
@@ -221,7 +203,7 @@ export const HashVerifierModal: React.FC<HashVerifierModalProps> = ({
                 Reset Canonical
               </button>
             </div>
-            <div className="mono" style={{ fontSize: '0.7rem', color: 'var(--text-dim)', marginBottom: '0.5rem' }}>
+            <div className="mono" style={{ fontSize: '0.68rem', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>
               Formula: SHA256(id|timestamp|actor_type|actor_id|action_type|details_json|previous_hash)
             </div>
 
@@ -234,10 +216,10 @@ export const HashVerifierModal: React.FC<HashVerifierModalProps> = ({
               }}
               style={{
                 width: '100%',
-                background: 'rgba(0,0,0,0.4)',
+                backgroundColor: 'var(--bg-surface)',
                 border: '1px solid var(--border-color)',
                 borderRadius: '4px',
-                color: '#fff',
+                color: 'var(--text-bright)',
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.75rem',
                 padding: '0.5rem',
@@ -247,7 +229,7 @@ export const HashVerifierModal: React.FC<HashVerifierModalProps> = ({
               title="Edit string to test cryptographic tamper detection"
             />
             {editablePayload !== canonicalPayload && (
-              <div style={{ fontSize: '0.72rem', color: '#f59e0b', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+              <div style={{ fontSize: '0.72rem', color: 'var(--status-warning)', marginTop: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                 <AlertTriangleIcon size={12} /> Payload modified (Simulating data tampering)
               </div>
             )}
@@ -256,10 +238,10 @@ export const HashVerifierModal: React.FC<HashVerifierModalProps> = ({
           {/* Section 4: Live Verification Result Banner */}
           <div
             style={{
-              padding: '0.9rem 1.25rem',
-              borderRadius: 'var(--radius-md)',
-              border: `1px solid ${isMatch ? 'rgba(34, 197, 94, 0.4)' : 'rgba(239, 68, 68, 0.4)'}`,
-              background: isMatch ? 'rgba(34, 197, 94, 0.08)' : 'rgba(239, 68, 68, 0.08)',
+              padding: '0.85rem 1.1rem',
+              borderRadius: 'var(--radius-sm)',
+              border: `1px solid ${isMatch ? 'rgba(34, 197, 94, 0.35)' : 'rgba(239, 68, 68, 0.35)'}`,
+              backgroundColor: isMatch ? 'rgba(34, 197, 94, 0.08)' : 'rgba(239, 68, 68, 0.08)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
@@ -267,26 +249,21 @@ export const HashVerifierModal: React.FC<HashVerifierModalProps> = ({
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <div style={{ color: isMatch ? '#4ade80' : '#ef4444' }}>
-                {isMatch ? <CheckCircleIcon size={24} /> : <AlertOctagonIcon size={24} />}
+              <div style={{ color: isMatch ? 'var(--status-normal)' : 'var(--status-critical)' }}>
+                {isMatch ? <CheckCircleIcon size={22} /> : <AlertOctagonIcon size={22} />}
               </div>
               <div>
-                <div style={{ fontWeight: 700, fontSize: '0.92rem', color: isMatch ? '#4ade80' : '#ef4444' }}>
+                <div style={{ fontWeight: 600, fontSize: '0.88rem', color: isMatch ? 'var(--status-normal)' : 'var(--status-critical)' }}>
                   {isMatch ? 'HASH INTEGRITY MATCH' : 'HASH MISMATCH (INTEGRITY COMPROMISED)'}
                 </div>
-                <div className="mono" style={{ fontSize: '0.75rem', color: 'var(--text-bright)', marginTop: '0.2rem', wordBreak: 'break-all' }}>
+                <div className="mono" style={{ fontSize: '0.72rem', color: 'var(--text-main)', marginTop: '0.15rem', wordBreak: 'break-all' }}>
                   Calculated: {isVerifying ? 'Calculating...' : calculatedHash}
                 </div>
               </div>
             </div>
             <span
-              className="badge"
-              style={{
-                fontSize: '0.7rem',
-                background: isMatch ? 'rgba(34, 197, 94, 0.2)' : 'rgba(239, 68, 68, 0.2)',
-                color: isMatch ? '#4ade80' : '#ef4444',
-                borderColor: isMatch ? 'rgba(34, 197, 94, 0.5)' : 'rgba(239, 68, 68, 0.5)'
-              }}
+              className={`badge badge-${isMatch ? 'normal' : 'critical'}`}
+              style={{ fontSize: '0.68rem' }}
             >
               {isMatch ? 'VALID BLOCK' : 'TAMPERED'}
             </span>
@@ -294,8 +271,8 @@ export const HashVerifierModal: React.FC<HashVerifierModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div style={{ padding: '0.85rem 1.5rem', borderTop: '1px solid var(--border-color)', background: 'var(--bg-surface)', display: 'flex', justifyContent: 'flex-end' }}>
-          <button className="btn btn-outline" onClick={onClose} style={{ fontSize: '0.8rem', padding: '0.4rem 1rem' }}>
+        <div style={{ padding: '0.75rem 1.5rem', borderTop: '1px solid var(--border-color)', backgroundColor: 'var(--bg-surface)', display: 'flex', justifyContent: 'flex-end' }}>
+          <button className="btn btn-outline" onClick={onClose} style={{ height: '32px', fontSize: '0.78rem' }}>
             Close Inspector
           </button>
         </div>

@@ -103,20 +103,22 @@ export const MachinesPage: React.FC<MachinesPageProps> = ({ selectedMachineId })
             return (
               <div
                 key={machine.id}
-                className={`card ${isSelected ? 'ai-card-highlight' : ''}`}
+                className="card"
                 style={{
                   cursor: 'pointer',
-                  borderColor: isSelected ? 'var(--accent-cyan)' : 'var(--border-color)',
-                  backgroundColor: isSelected ? 'rgba(6, 182, 212, 0.05)' : 'var(--bg-surface)'
+                  borderColor: isSelected ? 'var(--border-strong)' : 'var(--border-color)',
+                  borderLeft: isSelected ? '3px solid var(--accent-primary)' : '3px solid transparent',
+                  backgroundColor: isSelected ? 'var(--bg-surface-secondary)' : 'var(--bg-surface)',
+                  padding: '0.9rem'
                 }}
                 onClick={() => selectMachine(machine.id)}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                  <span className="mono" style={{ fontWeight: 700, color: 'var(--accent-cyan)' }}>{machine.id}</span>
+                  <span className="mono" style={{ fontWeight: 600, color: 'var(--accent-primary)', fontSize: '0.82rem' }}>{machine.id}</span>
                   <span className={`badge badge-${machine.status.toLowerCase()}`}>{machine.status}</span>
                 </div>
-                <div style={{ fontWeight: 600, fontSize: '0.9rem', color: '#fff' }}>{machine.name}</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
+                <div style={{ fontWeight: 600, fontSize: '0.86rem', color: 'var(--text-bright)' }}>{machine.name}</div>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                   Location: {machine.location}
                 </div>
               </div>
@@ -132,10 +134,10 @@ export const MachinesPage: React.FC<MachinesPageProps> = ({ selectedMachineId })
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-                    <span className="mono" style={{ fontSize: '1.1rem', color: 'var(--accent-cyan)', fontWeight: 700 }}>{activeMachine.id}</span>
+                    <span className="mono" style={{ fontSize: '1rem', color: 'var(--accent-primary)', fontWeight: 600 }}>{activeMachine.id}</span>
                     <span className={`badge badge-${activeMachine.status.toLowerCase()}`}>{activeMachine.status}</span>
                   </div>
-                  <h2 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#fff' }}>{activeMachine.name}</h2>
+                  <h2 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-bright)' }}>{activeMachine.name}</h2>
                 </div>
                 <div style={{ textAlign: 'right', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
                   <div>Type: <strong style={{ color: '#fff' }}>{activeMachine.type}</strong></div>
@@ -153,7 +155,7 @@ export const MachinesPage: React.FC<MachinesPageProps> = ({ selectedMachineId })
             <div className="card">
               <div className="card-title">
                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <ActivityIcon size={14} color="var(--accent-cyan)" /> Recent Telemetry Registers
+                  <ActivityIcon size={14} color="var(--accent-primary)" /> Recent Telemetry Registers
                 </span>
                 <span className="badge badge-normal" style={{ fontSize: '0.72rem' }}>
                   {activeMachine.recent_telemetry.length} Records Loaded
@@ -212,30 +214,30 @@ export const MachinesPage: React.FC<MachinesPageProps> = ({ selectedMachineId })
                 </span>
               </div>
               {activeMachine.maintenance_records.length > 0 ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                   {activeMachine.maintenance_records.map((m) => (
                     <div
                       key={m.id}
                       style={{
-                        background: 'var(--bg-surface-elevated)',
+                        backgroundColor: 'var(--bg-surface-secondary)',
                         border: '1px solid var(--border-color)',
-                        borderRadius: 'var(--radius-md)',
-                        padding: '0.9rem'
+                        borderRadius: 'var(--radius-sm)',
+                        padding: '0.85rem'
                       }}
                     >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <span className="mono" style={{ fontSize: '0.8rem', color: 'var(--accent-cyan)', fontWeight: 600 }}>{m.id}</span>
-                          <strong style={{ fontSize: '0.92rem', color: '#fff' }}>{m.component}</strong>
+                          <span className="mono" style={{ fontSize: '0.78rem', color: 'var(--accent-primary)', fontWeight: 600 }}>{m.id}</span>
+                          <strong style={{ fontSize: '0.88rem', color: 'var(--text-bright)' }}>{m.component}</strong>
                         </div>
-                        <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                          Technician: <strong style={{ color: '#fff' }}>{m.technician}</strong> • {new Date(m.timestamp).toLocaleDateString()}
+                        <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                          Technician: <strong style={{ color: 'var(--text-main)' }}>{m.technician}</strong> • {new Date(m.timestamp).toLocaleDateString()}
                         </span>
                       </div>
-                      <div style={{ fontSize: '0.85rem', color: 'var(--accent-blue)', fontWeight: 600, marginBottom: '0.25rem' }}>
+                      <div style={{ fontSize: '0.82rem', color: 'var(--accent-primary)', fontWeight: 500, marginBottom: '0.2rem' }}>
                         Action: {m.action_taken}
                       </div>
-                      <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0 }}>{m.notes}</p>
+                      <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', margin: 0 }}>{m.notes}</p>
                     </div>
                   ))}
                 </div>

@@ -28,36 +28,34 @@ export const ErrorAlert: React.FC<ErrorAlertProps> = ({
     <div
       className="card"
       style={{
-        border: '1px solid rgba(239, 68, 68, 0.4)',
-        background: 'rgba(239, 68, 68, 0.06)',
-        padding: '1.5rem',
+        border: '1px solid var(--border-color)',
+        borderLeft: '3px solid var(--status-critical)',
+        background: 'var(--bg-surface)',
+        padding: '1.25rem',
         margin: '1.5rem auto',
         maxWidth: '800px'
       }}
     >
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
         <div style={{ color: 'var(--status-critical)', marginTop: '2px' }}>
-          <AlertOctagonIcon size={24} />
+          <AlertOctagonIcon size={22} />
         </div>
         <div style={{ flex: 1 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.4rem' }}>
-            <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#ef4444', letterSpacing: '0.04em', textTransform: 'uppercase', margin: 0 }}>
-              SYSTEM COMMUNICATION ERROR
+            <h3 style={{ fontSize: '0.92rem', fontWeight: 600, color: 'var(--status-critical)', letterSpacing: '0.04em', textTransform: 'uppercase', margin: 0 }}>
+              System Service Disruption
             </h3>
             <span
-              className="badge"
+              className="badge badge-critical"
               style={{
-                fontSize: '0.68rem',
-                background: 'rgba(239, 68, 68, 0.15)',
-                color: '#ef4444',
-                borderColor: 'rgba(239, 68, 68, 0.4)'
+                fontSize: '0.68rem'
               }}
             >
               Status: {displayStatus}
             </span>
           </div>
 
-          <p style={{ fontSize: '0.88rem', color: '#cbd5e1', marginBottom: '0.85rem', lineHeight: '1.4' }}>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.85rem', lineHeight: '1.4' }}>
             {cleanMessage || 'Unable to retrieve incident or telemetry data from upstream backend service.'}
           </p>
 

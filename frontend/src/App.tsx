@@ -69,14 +69,14 @@ export const App: React.FC = () => {
           <div className="card">
             <div className="card-header-label">
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <BookOpenIcon size={14} color="var(--accent-cyan)" /> SOP Vector Knowledge Base
+                <BookOpenIcon size={14} color="var(--accent-primary)" /> SOP Vector Knowledge Base
               </span>
               <span className="badge badge-normal">2 SOPs Indexed</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
               <div style={{ padding: '1rem', background: 'var(--bg-surface-elevated)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span className="mono" style={{ fontWeight: 700, color: 'var(--accent-cyan)' }}>SOP-M204-BEARING</span>
+                  <span className="mono" style={{ fontWeight: 700, color: 'var(--accent-primary)' }}>SOP-M204-BEARING</span>
                   <span className="badge badge-normal">INDEXED</span>
                 </div>
                 <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#fff', marginTop: '0.4rem' }}>Hydraulic Drive & Bearing Failure Emergency Containment</div>
@@ -86,7 +86,7 @@ export const App: React.FC = () => {
               </div>
               <div style={{ padding: '1rem', background: 'var(--bg-surface-elevated)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span className="mono" style={{ fontWeight: 700, color: 'var(--accent-cyan)' }}>SOP-COOLING-PUMP</span>
+                  <span className="mono" style={{ fontWeight: 700, color: 'var(--accent-primary)' }}>SOP-COOLING-PUMP</span>
                   <span className="badge badge-normal">INDEXED</span>
                 </div>
                 <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#fff', marginTop: '0.4rem' }}>Secondary Auxiliary Coolant Pump Failure Response</div>
@@ -109,12 +109,12 @@ export const App: React.FC = () => {
           <div className="card">
             <div className="card-header-label">
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <TrendingUpIcon size={14} color="var(--accent-cyan)" /> Telemetry Predictive Signal Stream
+                <TrendingUpIcon size={14} color="var(--accent-primary)" /> Telemetry Predictive Signal Stream
               </span>
               <span className="badge badge-normal">1 Hz Sampling</span>
             </div>
             <div style={{ padding: '2.5rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-              <div style={{ display: 'inline-flex', padding: '1rem', background: 'rgba(6, 182, 212, 0.1)', borderRadius: '50%', marginBottom: '1rem', color: 'var(--accent-cyan)' }}>
+              <div style={{ display: 'inline-flex', padding: '1rem', background: 'rgba(56, 189, 248, 0.1)', borderRadius: '50%', marginBottom: '1rem', color: 'var(--accent-primary)' }}>
                 <TrendingUpIcon size={32} />
               </div>
               <h3 style={{ color: '#fff', fontSize: '1.1rem' }}>Continuous Statistical Anomaly Engine</h3>
@@ -141,7 +141,7 @@ export const App: React.FC = () => {
               <span className="badge badge-warning">1 Alert Active</span>
             </div>
             <div style={{ marginTop: '1rem' }}>
-              <div style={{ padding: '1rem', background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: 'var(--radius-md)' }}>
+              <div style={{ padding: '1rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-color)', borderLeft: '3px solid var(--status-critical)', borderRadius: 'var(--radius-md)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
                   <span className="mono" style={{ color: 'var(--status-critical)', fontWeight: 700 }}>ALT-M204-VIB-01</span>
                   <span className="badge badge-critical">CRITICAL VIOLATION</span>
@@ -164,11 +164,11 @@ export const App: React.FC = () => {
             </div>
           </div>
 
-          {/* SIMULATION CONTROLS SECTION (Relocated from top header) */}
-          <div className="card" style={{ marginBottom: '1.5rem', border: '1px solid rgba(6, 182, 212, 0.4)', background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.04) 0%, rgba(15, 19, 29, 0.95) 100%)' }}>
+          {/* SIMULATION CONTROLS SECTION */}
+          <div className="card" style={{ marginBottom: '1.5rem', border: '1px solid var(--border-strong)', background: 'var(--bg-surface)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem' }}>
               <div>
-                <span className="badge" style={{ background: 'rgba(6, 182, 212, 0.15)', color: 'var(--accent-cyan)', borderColor: 'rgba(6, 182, 212, 0.4)', marginBottom: '0.35rem' }}>
+                <span className="badge" style={{ background: 'rgba(56, 189, 248, 0.12)', color: 'var(--accent-primary)', borderColor: 'var(--border-strong)', marginBottom: '0.35rem' }}>
                   SIMULATION CONTROL
                 </span>
                 <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', margin: '0.2rem 0' }}>
@@ -178,13 +178,13 @@ export const App: React.FC = () => {
                   Controls telemetry injection, scenario fault triggers, and live demo state advancement.
                 </p>
               </div>
-              <div className="mono" style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)' }}>
+              <div className="mono" style={{ fontSize: '0.75rem', color: 'var(--accent-primary)' }}>
                 Target Endpoint: /api/simulation
               </div>
             </div>
 
             {simActionNotice && (
-              <div style={{ padding: '0.6rem 0.85rem', background: 'rgba(16, 185, 129, 0.15)', border: '1px solid rgba(16, 185, 129, 0.4)', borderRadius: 'var(--radius-sm)', color: '#4ade80', fontSize: '0.8rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div style={{ padding: '0.6rem 0.85rem', background: 'rgba(34, 197, 94, 0.1)', border: '1px solid rgba(34, 197, 94, 0.3)', borderRadius: 'var(--radius-sm)', color: 'var(--status-normal)', fontSize: '0.8rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <CheckCircleIcon size={14} /> {simActionNotice}
               </div>
             )}
@@ -196,8 +196,8 @@ export const App: React.FC = () => {
                   Injects 7.82 mm/s vibration spike and generates active incident ticket for M-204.
                 </p>
                 <button
-                  className="btn"
-                  style={{ width: '100%', background: 'linear-gradient(135deg, #ef4444, #b91c1c)', color: '#fff', fontSize: '0.8rem', padding: '0.5rem' }}
+                  className="btn btn-danger"
+                  style={{ width: '100%', fontSize: '0.8rem', padding: '0.5rem' }}
                   onClick={async () => {
                     try {
                       await apiService.triggerDegradation();
@@ -219,7 +219,7 @@ export const App: React.FC = () => {
                 </p>
                 <button
                   className="btn btn-outline"
-                  style={{ width: '100%', fontSize: '0.8rem', padding: '0.5rem', borderColor: 'var(--accent-blue)', color: '#60a5fa' }}
+                  style={{ width: '100%', fontSize: '0.8rem', padding: '0.5rem' }}
                   onClick={async () => {
                     try {
                       await apiService.triggerSimulationTick();
@@ -241,7 +241,7 @@ export const App: React.FC = () => {
                 </p>
                 <button
                   className="btn btn-outline"
-                  style={{ width: '100%', fontSize: '0.8rem', padding: '0.5rem', borderColor: 'var(--border-color)', color: 'var(--text-muted)' }}
+                  style={{ width: '100%', fontSize: '0.8rem', padding: '0.5rem' }}
                   onClick={async () => {
                     try {
                       await apiService.resetSimulation();
@@ -275,7 +275,7 @@ export const App: React.FC = () => {
               <div style={{ background: 'var(--bg-surface-elevated)', padding: '0.9rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Decision Ledger Protocol</div>
                 <div style={{ fontWeight: 600, color: '#fff', marginTop: '0.2rem' }}>SHA-256 Hash Chain Integrity</div>
-                <div style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', marginTop: '0.25rem' }}>Continuous parent-child hash verification</div>
+                <div style={{ fontSize: '0.72rem', color: 'var(--accent-primary)', marginTop: '0.25rem' }}>Continuous parent-child hash verification</div>
               </div>
               <div style={{ background: 'var(--bg-surface-elevated)', padding: '0.9rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Agent Pipeline Architecture</div>

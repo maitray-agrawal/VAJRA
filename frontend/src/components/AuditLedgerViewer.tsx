@@ -82,23 +82,14 @@ export const AuditLedgerViewer: React.FC<AuditLedgerViewerProps> = ({ incidentId
 
   // Derived Ledger Status Badge
   let ledgerStatusText = 'VERIFICATION PENDING';
-  let ledgerStatusBg = 'rgba(245, 158, 11, 0.15)';
-  let ledgerStatusColor = '#f59e0b';
-  let ledgerStatusBorder = 'rgba(245, 158, 11, 0.4)';
   let StatusIcon = ClockIcon;
 
   if (verification) {
     if (verification.is_valid) {
       ledgerStatusText = 'SHA-256 LEDGER VERIFIED';
-      ledgerStatusBg = 'rgba(34, 197, 94, 0.15)';
-      ledgerStatusColor = '#4ade80';
-      ledgerStatusBorder = 'rgba(34, 197, 94, 0.4)';
       StatusIcon = CheckCircleIcon;
     } else {
       ledgerStatusText = 'LEDGER INTEGRITY FAILURE';
-      ledgerStatusBg = 'rgba(239, 68, 68, 0.15)';
-      ledgerStatusColor = '#ef4444';
-      ledgerStatusBorder = 'rgba(239, 68, 68, 0.4)';
       StatusIcon = AlertOctagonIcon;
     }
   }
@@ -109,46 +100,27 @@ export const AuditLedgerViewer: React.FC<AuditLedgerViewerProps> = ({ incidentId
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.25rem' }}>
-            <h3 style={{ margin: 0, fontSize: '1.15rem', color: '#fff', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ color: 'var(--accent-cyan)' }}><ShieldCheckIcon size={18} /></span>
-              SHA-256 Cryptographic Decision Ledger
+            <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-bright)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              <span style={{ color: 'var(--accent-primary)' }}><ShieldCheckIcon size={18} /></span>
+              SHA-256 Decision Ledger & Audit Trail
             </h3>
             {/* Derived Ledger Status Badge */}
             <span
-              className="badge mono"
-              style={{
-                fontSize: '0.7rem',
-                padding: '0.2rem 0.6rem',
-                background: ledgerStatusBg,
-                color: ledgerStatusColor,
-                borderColor: ledgerStatusBorder,
-                fontWeight: 700,
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.35rem'
-              }}
+              className={`badge badge-${verification?.is_valid ? 'normal' : verification ? 'critical' : 'warning'}`}
+              style={{ fontSize: '0.68rem', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
             >
               <StatusIcon size={12} /> {ledgerStatusText}
             </span>
           </div>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0 }}>
-            Immutable SHA-256 hash-chained audit log enforcing zero-trust operational compliance. Click any hash block to launch the cryptographic inspector.
+          <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', margin: 0 }}>
+            Immutable SHA-256 hash-chained audit log enforcing zero-trust operational compliance. Click any hash block to inspect.
           </p>
         </div>
 
         <button
           onClick={handleVerify}
           disabled={verifying || logs.length === 0}
-          className="btn btn-primary"
-          style={{
-            fontSize: '0.8rem',
-            padding: '0.5rem 1rem',
-            background: 'linear-gradient(135deg, #10b981, #059669)',
-            borderColor: '#10b981',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.4rem'
-          }}
+          className="btn btn-success"
         >
           {verifying ? (
             <>
@@ -231,7 +203,7 @@ export const AuditLedgerViewer: React.FC<AuditLedgerViewerProps> = ({ incidentId
                     }}
                     className="table-row-hover"
                   >
-                    <td className="mono" style={{ padding: '0.65rem 0.5rem', color: 'var(--accent-cyan)', fontWeight: 700 }}>
+                    <td className="mono" style={{ padding: '0.65rem 0.5rem', color: 'var(--accent-primary)', fontWeight: 600 }}>
                       {log.id}
                     </td>
                     <td style={{ padding: '0.65rem 0.5rem', color: 'var(--text-bright)' }}>
@@ -241,15 +213,7 @@ export const AuditLedgerViewer: React.FC<AuditLedgerViewerProps> = ({ incidentId
                       <span className="mono">{log.actor_type}:{log.actor_id}</span>
                     </td>
                     <td style={{ padding: '0.65rem 0.5rem' }}>
-                      <span
-                        className="badge"
-                        style={{
-                          fontSize: '0.68rem',
-                          background: 'rgba(6, 182, 212, 0.1)',
-                          color: 'var(--accent-cyan)',
-                          borderColor: 'rgba(6, 182, 212, 0.3)'
-                        }}
-                      >
+                      <span className="badge badge-info">
                         {log.action_type}
                       </span>
                     </td>

@@ -73,28 +73,40 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
     }
   ];
 
+  // 6-stage core agentic loop stages
+  const coreLifecycle = [
+    { num: '01', name: 'Observe', desc: 'Telemetry & signals' },
+    { num: '02', name: 'Investigate', desc: 'Records & SOP retrieval' },
+    { num: '03', name: 'Decide', desc: 'Root cause & action' },
+    { num: '04', name: 'Act', desc: 'Approved actuation' },
+    { num: '05', name: 'Evaluate', desc: 'Measure response' },
+    { num: '06', name: 'Verify', desc: 'Audit & integrity' },
+  ];
+
+  const currentStageIdx = isInvestigating ? 2 : (traces && traces.length > 0 ? 5 : 0);
+
   return (
-    <div className="card" style={{ padding: '1.25rem', marginBottom: '1.25rem' }}>
+    <div className="card" style={{ padding: '1.25rem', marginBottom: '1.5rem' }}>
       {/* Header with Goal */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
         <div style={{ flex: 1, minWidth: '280px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
-            <span style={{ color: 'var(--accent-cyan)' }}><CpuIcon size={16} /></span>
-            <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+            <span style={{ color: 'var(--accent-primary)' }}><CpuIcon size={16} /></span>
+            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-bright)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               AGENT RUNTIME EXECUTION TRACE
             </span>
-            <span className="badge" style={{ fontSize: '0.65rem', background: 'rgba(6, 182, 212, 0.12)', color: 'var(--accent-cyan)', borderColor: 'rgba(6, 182, 212, 0.3)' }}>
-              DYNAMIC RUNTIME
+            <span className="badge badge-info" style={{ fontSize: '0.65rem' }}>
+              AUTONOMOUS
             </span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', background: 'rgba(0,0,0,0.25)', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
-            <span style={{ color: 'var(--accent-cyan)', marginTop: '2px' }}><TargetIcon size={14} /></span>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', backgroundColor: 'var(--bg-surface-secondary)', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
+            <span style={{ color: 'var(--accent-primary)', marginTop: '2px' }}><TargetIcon size={14} /></span>
             <div>
-              <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', display: 'block' }}>
-                Operational Goal:
+              <span className="mono" style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', display: 'block' }}>
+                Operational Objective:
               </span>
-              <span style={{ fontSize: '0.84rem', color: '#fff', fontWeight: 600 }}>
+              <span style={{ fontSize: '0.82rem', color: 'var(--text-main)', fontWeight: 500 }}>
                 {goal}
               </span>
             </div>
@@ -105,7 +117,7 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
           className="btn btn-primary"
           disabled={isInvestigating}
           onClick={onRunPipeline}
-          style={{ fontSize: '0.8rem', padding: '0.45rem 0.95rem', display: 'flex', alignItems: 'center', gap: '0.45rem', alignSelf: 'center' }}
+          style={{ height: '36px', fontSize: '0.8rem', alignSelf: 'center' }}
         >
           {isInvestigating ? (
             <>
@@ -119,9 +131,27 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
         </button>
       </div>
 
+      {/* 6-Stage Core Agentic Timeline */}
+      <div className="agentic-timeline">
+        {coreLifecycle.map((stage, idx) => {
+          const isDone = idx < currentStageIdx;
+          const isCurrent = idx === currentStageIdx;
+          return (
+            <div
+              key={stage.num}
+              className={`timeline-node ${isCurrent ? 'active' : ''} ${isDone ? 'completed' : ''}`}
+            >
+              <span className="timeline-step-index">{stage.num} {isDone ? '✓' : ''}</span>
+              <span className="timeline-step-label">{stage.name}</span>
+              <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>{stage.desc}</span>
+            </div>
+          );
+        })}
+      </div>
+
       {/* Iteration Trace Flow */}
       {traces && traces.length > 0 ? (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.85rem', marginBottom: '1.25rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.75rem', marginBottom: '1.25rem' }}>
           {traces.map((trace) => {
             const isFailed = trace.status === 'FAILED';
             const isAdapted = trace.status === 'ADAPTED';
@@ -135,14 +165,14 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
             const badgeBg = isFailed
               ? 'rgba(239, 68, 68, 0.15)'
               : isAdapted
-              ? 'rgba(6, 182, 212, 0.15)'
+              ? 'rgba(56, 189, 248, 0.12)'
               : 'rgba(34, 197, 94, 0.15)';
 
             const badgeColor = isFailed
-              ? '#ef4444'
+              ? 'var(--status-critical)'
               : isAdapted
-              ? 'var(--accent-cyan)'
-              : '#4ade80';
+              ? 'var(--accent-primary)'
+              : 'var(--status-normal)';
 
             return (
               <div
@@ -161,7 +191,7 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
                 <div>
                   {/* Iteration Header */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
-                    <span className="mono" style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', fontWeight: 700 }}>
+                    <span className="mono" style={{ fontSize: '0.72rem', color: 'var(--accent-primary)', fontWeight: 700 }}>
                       ITERATION 0{trace.iteration}
                     </span>
                     <span
@@ -212,15 +242,15 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
                   {/* Adaptation Note if present */}
                   {trace.adaptation_note && (
                     <div style={{
-                      background: 'rgba(6, 182, 212, 0.08)',
-                      borderLeft: '3px solid var(--accent-cyan)',
+                      backgroundColor: 'rgba(56, 189, 248, 0.08)',
+                      borderLeft: '3px solid var(--accent-primary)',
                       padding: '0.4rem 0.6rem',
                       borderRadius: '0 var(--radius-sm) var(--radius-sm) 0',
                       fontSize: '0.72rem',
                       color: 'var(--text-bright)',
                       marginBottom: '0.4rem'
                     }}>
-                      <div style={{ fontSize: '0.65rem', color: 'var(--accent-cyan)', fontWeight: 700, textTransform: 'uppercase' }}>
+                      <div style={{ fontSize: '0.65rem', color: 'var(--accent-primary)', fontWeight: 600, textTransform: 'uppercase' }}>
                         Adaptation Triggered:
                       </div>
                       {trace.adaptation_note}
@@ -229,8 +259,8 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
                 </div>
 
                 {/* Footer */}
-                <div style={{ marginTop: '0.5rem', paddingTop: '0.45rem', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.68rem' }}>
-                  <span style={{ color: 'var(--text-dim)' }}>Policy Gate:</span>
+                <div style={{ marginTop: '0.5rem', paddingTop: '0.45rem', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.68rem' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Policy Gate:</span>
                   <span className="mono" style={{ color: 'var(--status-normal)', fontWeight: 600 }}>
                     AUTONOMOUS
                   </span>
@@ -240,14 +270,14 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
           })}
         </div>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '0.85rem', marginBottom: '1.25rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '0.75rem', marginBottom: '1.25rem' }}>
           {fallbackSteps.map((step) => (
             <div
               key={step.id}
               style={{
-                background: 'var(--bg-surface-elevated)',
+                backgroundColor: 'var(--bg-surface-secondary)',
                 border: '1px solid var(--border-color)',
-                borderRadius: 'var(--radius-md)',
+                borderRadius: 'var(--radius-sm)',
                 padding: '0.85rem',
                 display: 'flex',
                 flexDirection: 'column',
@@ -256,28 +286,28 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
             >
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
-                  <span className="mono" style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', fontWeight: 700 }}>
+                  <span className="mono" style={{ fontSize: '0.7rem', color: 'var(--accent-primary)', fontWeight: 600 }}>
                     CAPABILITY 0{step.stepNumber}
                   </span>
-                  <span className="badge" style={{ fontSize: '0.65rem', padding: '0.15rem 0.4rem', background: 'rgba(255,255,255,0.05)', color: 'var(--text-muted)' }}>
+                  <span className="badge badge-normal" style={{ fontSize: '0.65rem' }}>
                     READY
                   </span>
                 </div>
-                <div style={{ fontSize: '0.84rem', fontWeight: 600, color: '#fff', marginBottom: '0.2rem' }}>
+                <div style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-bright)', marginBottom: '0.2rem' }}>
                   {step.title}
                 </div>
-                <div className="mono" style={{ fontSize: '0.72rem', color: 'var(--accent-cyan)', marginBottom: '0.5rem' }}>
+                <div className="mono" style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
                   {step.toolSelected}
                 </div>
-                <div style={{ background: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: 'var(--radius-sm)', padding: '0.5rem 0.65rem', marginBottom: '0.5rem' }}>
-                  <p style={{ fontSize: '0.76rem', color: 'var(--text-bright)', lineHeight: '1.4', margin: 0 }}>
+                <div style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', padding: '0.5rem 0.65rem', marginBottom: '0.5rem' }}>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--text-main)', lineHeight: '1.4', margin: 0 }}>
                     {step.evidenceObtained}
                   </p>
                 </div>
               </div>
-              <div style={{ marginTop: '0.5rem', paddingTop: '0.45rem', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.68rem' }}>
-                <span style={{ color: 'var(--text-dim)' }}>Confidence:</span>
-                <span className="mono" style={{ color: 'var(--status-normal)', fontWeight: 700 }}>{step.confidence}</span>
+              <div style={{ marginTop: '0.5rem', paddingTop: '0.45rem', borderTop: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.68rem' }}>
+                <span style={{ color: 'var(--text-muted)' }}>Confidence:</span>
+                <span className="mono" style={{ color: 'var(--status-normal)', fontWeight: 600 }}>{step.confidence}</span>
               </div>
             </div>
           ))}

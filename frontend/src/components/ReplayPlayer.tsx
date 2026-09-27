@@ -78,17 +78,17 @@ export const ReplayPlayer: React.FC<ReplayPlayerProps> = ({ incidentId }) => {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.85rem', flexWrap: 'wrap', gap: '0.75rem' }}>
         <div>
-          <h3 style={{ margin: 0, fontSize: '1.15rem', color: '#fff', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-            <span style={{ color: 'var(--accent-cyan)' }}><RewindIcon size={18} /></span>
+          <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-bright)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+            <span style={{ color: 'var(--accent-primary)' }}><RewindIcon size={18} /></span>
             Time-Travel Incident Replay Engine
           </h3>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: '0.2rem 0 0 0' }}>
-            Interactive temporal synthesis combining telemetry streams, AI agent interventions, and human approvals.
+          <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', margin: '0.2rem 0 0 0' }}>
+            Interactive temporal synthesis combining telemetry streams, agent interventions, and human approvals.
           </p>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-color)', padding: '0.35rem 0.75rem', borderRadius: 'var(--radius-md)' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Timeline Progress:</span>
-          <span className="mono" style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--accent-cyan)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', backgroundColor: 'var(--bg-surface-secondary)', border: '1px solid var(--border-color)', padding: '0.35rem 0.75rem', borderRadius: 'var(--radius-sm)' }}>
+          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Timeline Progress:</span>
+          <span className="mono" style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--accent-primary)' }}>
             Step {currentStepIdx + 1} / {timeline.total_steps}
           </span>
         </div>
@@ -96,29 +96,29 @@ export const ReplayPlayer: React.FC<ReplayPlayerProps> = ({ incidentId }) => {
 
       {/* Telemetry Gauge Display */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.75rem', marginBottom: '1.25rem' }}>
-        <div style={{ padding: '0.85rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
-          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Vibration</div>
-          <div className="mono" style={{ fontSize: '1.3rem', fontWeight: 700, marginTop: '0.2rem', color: currentStep.vibration_mm_s > 4.5 ? 'var(--status-critical)' : 'var(--status-normal)' }}>
+        <div style={{ padding: '0.85rem', backgroundColor: 'var(--bg-surface-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
+          <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Vibration</div>
+          <div className="mono" style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: currentStep.vibration_mm_s > 4.5 ? 'var(--status-critical)' : 'var(--status-normal)' }}>
             {currentStep.vibration_mm_s.toFixed(2)} mm/s
           </div>
         </div>
 
-        <div style={{ padding: '0.85rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
-          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Bearing Temperature</div>
-          <div className="mono" style={{ fontSize: '1.3rem', fontWeight: 700, marginTop: '0.2rem', color: currentStep.temp_celsius > 80 ? 'var(--status-warning)' : 'var(--status-normal)' }}>
+        <div style={{ padding: '0.85rem', backgroundColor: 'var(--bg-surface-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
+          <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Bearing Temperature</div>
+          <div className="mono" style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: currentStep.temp_celsius > 80 ? 'var(--status-warning)' : 'var(--status-normal)' }}>
             {currentStep.temp_celsius.toFixed(1)} °C
           </div>
         </div>
 
-        <div style={{ padding: '0.85rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
-          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Throughput Flow</div>
-          <div className="mono" style={{ fontSize: '1.3rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--accent-cyan)' }}>
+        <div style={{ padding: '0.85rem', backgroundColor: 'var(--bg-surface-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
+          <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Throughput Flow</div>
+          <div className="mono" style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: '0.2rem', color: 'var(--accent-primary)' }}>
             {currentStep.output_units_min.toFixed(0)} units/min
           </div>
         </div>
 
-        <div style={{ padding: '0.85rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', textAlign: 'center' }}>
-          <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Machine State</div>
+        <div style={{ padding: '0.85rem', backgroundColor: 'var(--bg-surface-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', textAlign: 'center' }}>
+          <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Machine State</div>
           <div style={{ marginTop: '0.35rem' }}>
             <span className={`badge badge-${currentStep.machine_status.toLowerCase()}`}>
               {currentStep.machine_status}
@@ -128,7 +128,7 @@ export const ReplayPlayer: React.FC<ReplayPlayerProps> = ({ incidentId }) => {
       </div>
 
       {/* Scrubbing Control Bar */}
-      <div style={{ background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '1rem', marginBottom: '1.25rem' }}>
+      <div style={{ backgroundColor: 'var(--bg-surface-secondary)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-sm)', padding: '1rem', marginBottom: '1.25rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flexWrap: 'wrap' }}>
           <button
             onClick={() => setIsPlaying(!isPlaying)}
@@ -160,7 +160,7 @@ export const ReplayPlayer: React.FC<ReplayPlayerProps> = ({ incidentId }) => {
               max={timeline.total_steps - 1}
               value={currentStepIdx}
               onChange={handleSliderChange}
-              style={{ width: '100%', accentColor: 'var(--accent-cyan)', cursor: 'pointer' }}
+              style={{ width: '100%', accentColor: 'var(--accent-primary)', cursor: 'pointer' }}
             />
           </div>
 
@@ -181,9 +181,9 @@ export const ReplayPlayer: React.FC<ReplayPlayerProps> = ({ incidentId }) => {
                   fontSize: '0.72rem',
                   fontWeight: 700,
                   cursor: 'pointer',
-                  background: playbackSpeed === s.speed ? 'rgba(6, 182, 212, 0.2)' : 'rgba(255,255,255,0.05)',
-                  color: playbackSpeed === s.speed ? 'var(--accent-cyan)' : 'var(--text-muted)',
-                  border: `1px solid ${playbackSpeed === s.speed ? 'rgba(6, 182, 212, 0.4)' : 'transparent'}`
+                  background: playbackSpeed === s.speed ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255,255,255,0.05)',
+                  color: playbackSpeed === s.speed ? 'var(--accent-primary)' : 'var(--text-muted)',
+                  border: `1px solid ${playbackSpeed === s.speed ? 'var(--border-strong)' : 'transparent'}`
                 }}
               >
                 {s.label}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vajra-astra.onrender.com/sitemap.xml

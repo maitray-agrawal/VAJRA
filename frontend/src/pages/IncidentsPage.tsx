@@ -265,12 +265,12 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
                     onClick={() => selectIncident(incident.id)}
                     style={{
                       cursor: 'pointer',
-                      background: isSelected ? 'rgba(6, 182, 212, 0.08)' : 'transparent',
-                      borderLeft: isSelected ? '3px solid var(--accent-cyan)' : '3px solid transparent'
+                      backgroundColor: isSelected ? 'rgba(56, 189, 248, 0.08)' : 'transparent',
+                      borderLeft: isSelected ? '3px solid var(--accent-primary)' : '3px solid transparent'
                     }}
                     className="table-row-hover"
                   >
-                    <td className="mono" style={{ fontWeight: 700, color: 'var(--accent-cyan)' }}>
+                    <td className="mono" style={{ fontWeight: 600, color: 'var(--accent-primary)' }}>
                       {incident.id}
                     </td>
                     <td className="mono" style={{ fontWeight: 600 }}>
@@ -282,30 +282,23 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
                       </span>
                     </td>
                     <td>
-                      <span
-                        className="badge"
-                        style={{
-                          background: incident.status === 'CONTAINED' ? 'rgba(139, 92, 246, 0.15)' : incident.status === 'APPROVED' ? 'rgba(34, 197, 94, 0.15)' : 'rgba(245, 158, 11, 0.15)',
-                          color: incident.status === 'CONTAINED' ? '#c084fc' : incident.status === 'APPROVED' ? '#4ade80' : '#f59e0b',
-                          borderColor: incident.status === 'CONTAINED' ? 'rgba(139, 92, 246, 0.4)' : incident.status === 'APPROVED' ? 'rgba(34, 197, 94, 0.4)' : 'rgba(245, 158, 11, 0.4)'
-                        }}
-                      >
+                      <span className={`badge badge-${incident.status === 'CONTAINED' || incident.status === 'APPROVED' ? 'normal' : 'warning'}`}>
                         {incident.status}
                       </span>
                     </td>
-                    <td style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>
+                    <td style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>
                       {new Date(incident.created_at).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}
                     </td>
-                    <td className="mono" style={{ fontSize: '0.78rem', color: 'var(--status-critical)', fontWeight: 600 }}>
+                    <td className="mono" style={{ fontSize: '0.75rem', color: 'var(--status-critical)', fontWeight: 600 }}>
                       {riskExposure}
                     </td>
-                    <td style={{ maxWidth: '280px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: 'var(--text-bright)' }} title={recAction}>
+                    <td style={{ maxWidth: '280px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: 'var(--text-main)' }} title={recAction}>
                       {recAction}
                     </td>
                     <td style={{ textAlign: 'right' }}>
                       <button
                         className={`btn ${isSelected ? 'btn-primary' : 'btn-outline'}`}
-                        style={{ fontSize: '0.72rem', padding: '0.25rem 0.6rem' }}
+                        style={{ height: '28px', fontSize: '0.72rem', padding: '0 0.6rem' }}
                         onClick={(e) => {
                           e.stopPropagation();
                           selectIncident(incident.id);
@@ -322,7 +315,7 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
         </div>
       </div>
 
-      {/* PHASE 10: INCIDENT DETAIL PAGE HIERARCHY */}
+      {/* Detail Section */}
       {activeIncident ? (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           {/* Sub-Navigation Tabs */}
@@ -330,30 +323,30 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
             <button
               onClick={() => setActiveTab('workspace')}
               className={`btn ${activeTab === 'workspace' ? 'btn-primary' : 'btn-outline'}`}
-              style={{ fontSize: '0.78rem', padding: '0.4rem 0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+              style={{ height: '32px', fontSize: '0.78rem' }}
             >
-              <ActivityIcon size={14} /> Investigation Workspace
+              <ActivityIcon size={13} /> Investigation Workspace
             </button>
             <button
               onClick={() => setActiveTab('audit')}
               className={`btn ${activeTab === 'audit' ? 'btn-primary' : 'btn-outline'}`}
-              style={{ fontSize: '0.78rem', padding: '0.4rem 0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+              style={{ height: '32px', fontSize: '0.78rem' }}
             >
-              <ShieldCheckIcon size={14} /> Decision Ledger (SHA-256)
+              <ShieldCheckIcon size={13} /> Decision Ledger (SHA-256)
             </button>
             <button
               onClick={() => setActiveTab('explainability')}
               className={`btn ${activeTab === 'explainability' ? 'btn-primary' : 'btn-outline'}`}
-              style={{ fontSize: '0.78rem', padding: '0.4rem 0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+              style={{ height: '32px', fontSize: '0.78rem' }}
             >
-              <BrainIcon size={14} /> AI Explainability Map
+              <BrainIcon size={13} /> AI Explainability Map
             </button>
             <button
               onClick={() => setActiveTab('replay')}
               className={`btn ${activeTab === 'replay' ? 'btn-primary' : 'btn-outline'}`}
-              style={{ fontSize: '0.78rem', padding: '0.4rem 0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+              style={{ height: '32px', fontSize: '0.78rem' }}
             >
-              <RewindIcon size={14} /> Time-Travel Replay
+              <RewindIcon size={13} /> Time-Travel Replay
             </button>
           </div>
 
@@ -369,29 +362,21 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
                   <div>
                     <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '0.4rem', flexWrap: 'wrap' }}>
                       <span className={`badge badge-${activeIncident.severity.toLowerCase()}`}>{activeIncident.severity}</span>
-                      <span
-                        className="badge"
-                        style={{
-                          background: activeIncident.status === 'CONTAINED' ? 'rgba(139, 92, 246, 0.15)' : activeIncident.status === 'APPROVED' ? 'rgba(34, 197, 94, 0.15)' : 'rgba(59, 130, 246, 0.15)',
-                          color: activeIncident.status === 'CONTAINED' ? '#c084fc' : activeIncident.status === 'APPROVED' ? '#4ade80' : '#60a5fa',
-                          borderColor: activeIncident.status === 'CONTAINED' ? 'rgba(139, 92, 246, 0.4)' : activeIncident.status === 'APPROVED' ? 'rgba(34, 197, 94, 0.4)' : 'rgba(59, 130, 246, 0.4)'
-                        }}
-                      >
+                      <span className={`badge badge-${activeIncident.status === 'CONTAINED' || activeIncident.status === 'APPROVED' ? 'normal' : 'warning'}`}>
                         STATUS: {activeIncident.status}
                       </span>
-                      <span className="mono" style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>{activeIncident.id}</span>
+                      <span className="mono" style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>{activeIncident.id}</span>
                     </div>
-                    <h2 style={{ fontSize: '1.35rem', fontWeight: 700, color: '#fff' }}>{activeIncident.title}</h2>
-                    <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
-                      Target Machine: <strong style={{ color: '#fff' }}>{activeIncident.machine_id}</strong> • Opened: {new Date(activeIncident.created_at).toLocaleString()}
+                    <h2 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-bright)' }}>{activeIncident.title}</h2>
+                    <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
+                      Target Machine: <strong style={{ color: 'var(--text-bright)' }}>{activeIncident.machine_id}</strong> • Opened: {new Date(activeIncident.created_at).toLocaleString()}
                     </p>
                   </div>
                   {activeIncident.status === 'APPROVED' && (
                     <button
-                      className="btn btn-primary"
+                      className="btn btn-success"
                       disabled={executing}
                       onClick={() => handleExecuteActuation(activeIncident.id)}
-                      style={{ background: 'linear-gradient(135deg, #10b981, #059669)', borderColor: '#10b981', boxShadow: '0 0 15px rgba(16, 185, 129, 0.4)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
                     >
                       <ZapIcon size={14} />
                       {executing ? 'Executing Actuation...' : 'Execute Containment Action'}
@@ -399,11 +384,11 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
                   )}
                 </div>
 
-                <div style={{ background: 'var(--bg-surface-elevated)', padding: '1rem', borderRadius: 'var(--radius-md)', borderLeft: '3px solid var(--accent-cyan)' }}>
-                  <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent-cyan)', textTransform: 'uppercase', marginBottom: '0.35rem', letterSpacing: '0.04em' }}>
+                <div style={{ backgroundColor: 'var(--bg-surface-secondary)', padding: '0.9rem 1rem', borderRadius: 'var(--radius-sm)', borderLeft: '3px solid var(--accent-primary)' }}>
+                  <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--accent-primary)', textTransform: 'uppercase', marginBottom: '0.3rem', letterSpacing: '0.04em' }}>
                     MULTI-AGENT SYNTHESIZED INCIDENT SUMMARY
                   </div>
-                  <p style={{ fontSize: '0.9rem', color: 'var(--text-bright)', lineHeight: '1.5', margin: 0 }}>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--text-main)', lineHeight: '1.45', margin: 0 }}>
                     {activeIncident.summary || 'Click "Run 4-Stage AI Pipeline" to trigger complete multi-agent correlation.'}
                   </p>
                 </div>
@@ -421,7 +406,7 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
                 {/* EVIDENCE: Telemetry Anomaly Signal */}
                 <div className="card" style={{ padding: '1.1rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                       TELEMETRY ANOMALY SIGNAL (Z-SCORE EVALUATION)
                     </div>
                     <span className={`badge badge-${activeIncident.severity.toLowerCase()}`} style={{ fontSize: '0.68rem' }}>
@@ -514,7 +499,7 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <span className="mono" style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', background: 'rgba(6,182,212,0.1)', border: '1px solid rgba(6,182,212,0.3)', padding: '2px 6px', borderRadius: '4px' }}>
+                          <span className="mono" style={{ fontSize: '0.75rem', color: 'var(--accent-primary)', background: 'rgba(56, 189, 248, 0.1)', border: '1px solid var(--border-strong)', padding: '2px 6px', borderRadius: 'var(--radius-sm)' }}>
                             {item.source_type}
                           </span>
                           <strong style={{ fontSize: '0.92rem', color: '#fff' }}>{item.title}</strong>
@@ -576,18 +561,12 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
 
                         {isApproved && activeIncident.status !== 'CONTAINED' && (
                           <button
-                            className="btn btn-primary"
+                            className="btn btn-success"
                             disabled={executing}
                             onClick={() => handleExecuteActuation(activeIncident.id)}
                             style={{
                               marginTop: '0.5rem',
-                              background: 'linear-gradient(135deg, #10b981, #059669)',
-                              borderColor: '#10b981',
-                              boxShadow: '0 0 15px rgba(16, 185, 129, 0.4)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                              gap: '0.4rem'
+                              width: '100%'
                             }}
                           >
                             <ZapIcon size={14} />
@@ -603,13 +582,13 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
                 <div className="card">
                   <div className="card-title">
                     <span>Matched SOP Protocol (RAG Engine)</span>
-                    {sop && <span className="mono" style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)' }}>{sop.sop_code}</span>}
+                    {sop && <span className="mono" style={{ fontSize: '0.75rem', color: 'var(--accent-primary)' }}>{sop.sop_code}</span>}
                   </div>
                   {sop ? (
                     <div>
                       <h4 style={{ fontSize: '0.95rem', fontWeight: 600, marginBottom: '0.5rem', color: '#fff' }}>{sop.title}</h4>
                       <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
-                        Target Component: <span className="mono" style={{ color: 'var(--accent-cyan)' }}>{sop.target_component}</span>
+                        Target Component: <span className="mono" style={{ color: 'var(--accent-primary)' }}>{sop.target_component}</span>
                       </div>
                       <pre style={{
                         background: 'var(--bg-surface-elevated)',

@@ -175,39 +175,37 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
 
   return (
     <div
-      className="modal-backdrop"
-      onClick={onClose}
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
-        background: 'rgba(5, 10, 20, 0.85)',
-        backdropFilter: 'blur(8px)',
+        background: 'rgba(0, 0, 0, 0.75)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 99999
       }}
+      onClick={onClose}
     >
       <div
         className="modal-card"
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: 'var(--bg-card)',
-          border: '1px solid var(--border-color)',
-          borderRadius: '12px',
+          background: 'var(--bg-surface)',
+          border: '1px solid var(--border-strong)',
+          borderRadius: 'var(--radius-lg)',
           width: '90%',
           maxWidth: '700px',
-          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6)',
+          boxShadow: 'var(--shadow-elevated)',
           overflow: 'hidden'
         }}
       >
         {/* Modal Header */}
         <div
           style={{
-            background: 'linear-gradient(90deg, rgba(6, 182, 212, 0.15), rgba(15, 23, 42, 0.95))',
+            background: 'var(--bg-surface-elevated)',
             padding: '1.15rem 1.5rem',
             borderBottom: '1px solid var(--border-color)',
             display: 'flex',
@@ -218,18 +216,18 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <div
               style={{
-                background: 'var(--accent-cyan)',
-                color: '#000',
-                fontWeight: 800,
-                borderRadius: '6px',
+                background: 'var(--accent-primary)',
+                color: '#080A0D',
+                fontWeight: 700,
+                borderRadius: 'var(--radius-sm)',
                 padding: '2px 8px',
-                fontSize: '0.8rem'
+                fontSize: '0.75rem'
               }}
             >
               ACT {currentStep.act} / 7
             </div>
-            <h3 style={{ margin: 0, fontSize: '1.15rem', color: '#fff', fontWeight: 700 }}>
-              Judge Demo Walkthrough Guide
+            <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 600 }}>
+              Industrial Demonstration Guide
             </h3>
           </div>
           <button
@@ -251,7 +249,7 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
         <div
           style={{
             padding: '0.65rem 1.5rem',
-            background: 'rgba(0, 0, 0, 0.3)',
+            background: 'var(--bg-secondary)',
             borderBottom: '1px solid var(--border-color)',
             display: 'flex',
             justifyContent: 'space-between',
@@ -275,8 +273,8 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
             </button>
           </div>
 
-          <div className="mono" style={{ fontSize: '0.7rem', color: 'var(--accent-cyan)' }}>
-            Keys <strong style={{ color: '#fff' }}>[1–7]</strong> Act • <strong style={{ color: '#fff' }}>[←/→]</strong> Nav • <strong style={{ color: '#fff' }}>[Esc]</strong> Close
+          <div className="mono" style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+            Keys <strong style={{ color: 'var(--text-primary)' }}>[1–7]</strong> Act • <strong style={{ color: 'var(--text-primary)' }}>[←/→]</strong> Nav • <strong style={{ color: 'var(--text-primary)' }}>[Esc]</strong> Close
           </div>
         </div>
 
@@ -289,15 +287,15 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
                 style={{
                   background: 'var(--bg-surface-elevated)',
                   border: '1px solid var(--border-color)',
-                  borderLeft: '4px solid var(--accent-cyan)',
-                  borderRadius: '8px',
+                  borderLeft: '3px solid var(--accent-primary)',
+                  borderRadius: 'var(--radius-md)',
                   padding: '1.15rem'
                 }}
               >
-                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent-cyan)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>
+                <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--accent-primary)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem' }}>
                   Core Value Proposition
                 </div>
-                <p style={{ fontSize: '0.95rem', color: '#fff', lineHeight: '1.55', margin: 0, fontWeight: 500 }}>
+                <p style={{ fontSize: '0.92rem', color: 'var(--text-primary)', lineHeight: '1.55', margin: 0, fontWeight: 400 }}>
                   "VAJRA is the agentic industrial crisis response platform that transforms high-frequency plant telemetry into grounded, explainable incident investigation and adaptive recovery—strictly bounded by human-in-the-loop authorization and tamper-evident SHA-256 cryptographic auditability."
                 </p>
               </div>
@@ -307,11 +305,11 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
                 style={{
                   background: 'var(--bg-surface-elevated)',
                   border: '1px solid var(--border-color)',
-                  borderRadius: '8px',
+                  borderRadius: 'var(--radius-md)',
                   padding: '1.15rem'
                 }}
               >
-                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.85rem' }}>
+                <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.85rem' }}>
                   End-to-End System Architecture
                 </div>
                 <div
@@ -324,31 +322,31 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
                     fontSize: '0.75rem'
                   }}
                 >
-                  <span style={{ background: 'rgba(6,182,212,0.15)', color: 'var(--accent-cyan)', border: '1px solid rgba(6,182,212,0.3)', padding: '4px 8px', borderRadius: '4px' }}>
+                  <span style={{ background: 'var(--bg-surface)', color: 'var(--accent-primary)', border: '1px solid var(--border-strong)', padding: '4px 8px', borderRadius: 'var(--radius-sm)' }}>
                     Sensor Signal
                   </span>
                   <span style={{ color: 'var(--text-muted)' }}>→</span>
-                  <span style={{ background: 'rgba(245,158,11,0.15)', color: '#f59e0b', border: '1px solid rgba(245,158,11,0.3)', padding: '4px 8px', borderRadius: '4px' }}>
+                  <span style={{ background: 'var(--bg-surface)', color: 'var(--status-warning)', border: '1px solid var(--border-strong)', padding: '4px 8px', borderRadius: 'var(--radius-sm)' }}>
                     Anomaly Detection
                   </span>
                   <span style={{ color: 'var(--text-muted)' }}>→</span>
-                  <span style={{ background: 'rgba(59,130,246,0.15)', color: '#60a5fa', border: '1px solid rgba(59,130,246,0.3)', padding: '4px 8px', borderRadius: '4px' }}>
+                  <span style={{ background: 'var(--bg-surface)', color: 'var(--status-critical)', border: '1px solid var(--border-strong)', padding: '4px 8px', borderRadius: 'var(--radius-sm)' }}>
                     Incident Ticket
                   </span>
                   <span style={{ color: 'var(--text-muted)' }}>→</span>
-                  <span style={{ background: 'rgba(139,92,246,0.15)', color: '#c084fc', border: '1px solid rgba(139,92,246,0.3)', padding: '4px 8px', borderRadius: '4px' }}>
-                    4-Stage AI Pipeline
+                  <span style={{ background: 'var(--bg-surface)', color: 'var(--accent-primary)', border: '1px solid var(--border-strong)', padding: '4px 8px', borderRadius: 'var(--radius-sm)' }}>
+                    Agent Investigation
                   </span>
                   <span style={{ color: 'var(--text-muted)' }}>→</span>
-                  <span style={{ background: 'rgba(239,68,68,0.15)', color: '#f87171', border: '1px solid rgba(239,68,68,0.3)', padding: '4px 8px', borderRadius: '4px' }}>
+                  <span style={{ background: 'var(--bg-surface)', color: 'var(--status-warning)', border: '1px solid var(--border-strong)', padding: '4px 8px', borderRadius: 'var(--radius-sm)' }}>
                     Human Approval Gate
                   </span>
                   <span style={{ color: 'var(--text-muted)' }}>→</span>
-                  <span style={{ background: 'rgba(34,197,94,0.15)', color: '#4ade80', border: '1px solid rgba(34,197,94,0.3)', padding: '4px 8px', borderRadius: '4px' }}>
+                  <span style={{ background: 'var(--bg-surface)', color: 'var(--status-normal)', border: '1px solid var(--border-strong)', padding: '4px 8px', borderRadius: 'var(--radius-sm)' }}>
                     Actuation
                   </span>
                   <span style={{ color: 'var(--text-muted)' }}>→</span>
-                  <span style={{ background: 'rgba(6,182,212,0.15)', color: 'var(--accent-cyan)', border: '1px solid rgba(6,182,212,0.3)', padding: '4px 8px', borderRadius: '4px' }}>
+                  <span style={{ background: 'var(--bg-surface)', color: 'var(--accent-primary)', border: '1px solid var(--border-strong)', padding: '4px 8px', borderRadius: 'var(--radius-sm)' }}>
                     SHA-256 Ledger
                   </span>
                 </div>
@@ -358,13 +356,13 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
             <>
               {/* Act Header */}
               <div style={{ marginBottom: '1.25rem' }}>
-                <div style={{ fontSize: '0.8rem', color: 'var(--accent-cyan)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                <div style={{ fontSize: '0.75rem', color: 'var(--accent-primary)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                   {currentStep.subtitle}
                 </div>
-                <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#fff', margin: '0.2rem 0 0.5rem 0' }}>
+                <h2 style={{ fontSize: '1.3rem', fontWeight: 600, color: 'var(--text-primary)', margin: '0.2rem 0 0.5rem 0' }}>
                   {currentStep.title}
                 </h2>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-bright)', lineHeight: '1.55', margin: 0 }}>
+                <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.55', margin: 0 }}>
                   {currentStep.description}
                 </p>
               </div>
@@ -372,17 +370,18 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
               {/* Key Metric Box */}
               <div
                 style={{
-                  background: 'rgba(6, 182, 212, 0.08)',
-                  border: '1px solid rgba(6, 182, 212, 0.25)',
-                  borderRadius: '8px',
+                  background: 'var(--bg-surface-elevated)',
+                  border: '1px solid var(--border-color)',
+                  borderLeft: '3px solid var(--accent-primary)',
+                  borderRadius: 'var(--radius-md)',
                   padding: '0.85rem 1.1rem',
                   marginBottom: '1.5rem',
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.85rem',
-                  color: 'var(--accent-cyan)'
+                  fontSize: '0.82rem',
+                  color: 'var(--text-primary)'
                 }}
               >
-                <strong>Key Demonstration Metric:</strong> {currentStep.keyMetric}
+                <strong style={{ color: 'var(--accent-primary)' }}>Key Demonstration Metric:</strong> {currentStep.keyMetric}
               </div>
 
               {/* Action Trigger Button */}
@@ -395,8 +394,8 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
                     style={{
                       width: '100%',
                       padding: '0.75rem 1.25rem',
-                      fontSize: '0.95rem',
-                      fontWeight: 700,
+                      fontSize: '0.9rem',
+                      fontWeight: 600,
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -433,19 +432,19 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
                       key={idx}
                       onClick={() => setCurrentStepIndex(idx)}
                       style={{
-                        width: '24px',
-                        height: '24px',
-                        borderRadius: '4px',
-                        background: idx === currentStepIndex ? 'var(--accent-cyan)' : 'rgba(255, 255, 255, 0.1)',
-                        color: idx === currentStepIndex ? '#000' : 'var(--text-muted)',
+                        width: '26px',
+                        height: '26px',
+                        borderRadius: 'var(--radius-sm)',
+                        background: idx === currentStepIndex ? 'var(--accent-primary)' : 'var(--bg-surface-elevated)',
+                        color: idx === currentStepIndex ? '#080A0D' : 'var(--text-muted)',
                         fontSize: '0.72rem',
                         fontWeight: 700,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                        border: idx === currentStepIndex ? '1px solid var(--accent-cyan)' : '1px solid rgba(255,255,255,0.1)'
+                        transition: 'all 0.15s ease',
+                        border: idx === currentStepIndex ? '1px solid var(--accent-primary)' : '1px solid var(--border-color)'
                       }}
                     >
                       {idx + 1}
