@@ -230,134 +230,96 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
         </div>
       </div>
 
-      {/* PHASE 9: ALIGNED INDUSTRIAL OPERATIONS QUEUE TABLE */}
-      <div className="card" style={{ marginBottom: '1.5rem', padding: '1rem' }}>
-        <div className="card-header-label" style={{ marginBottom: '0.75rem' }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-            <AlertTriangleIcon size={14} color="var(--status-critical)" /> Active Incident Operations Queue
-          </span>
-          <span className="badge badge-normal">{incidents.length} Registered</span>
-        </div>
-
-        <div className="table-container" style={{ maxHeight: '280px', overflowY: 'auto' }}>
-          <table className="incident-operations-table">
-            <thead>
-              <tr>
-                <th style={{ width: '130px' }}>Incident ID</th>
-                <th style={{ width: '90px' }}>Machine</th>
-                <th style={{ width: '100px' }}>Severity</th>
-                <th style={{ width: '130px' }}>Status</th>
-                <th style={{ width: '140px' }}>Detected</th>
-                <th style={{ width: '140px' }}>Risk Model</th>
-                <th>Recommended Action</th>
-                <th style={{ width: '110px', textAlign: 'right' }}>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {incidents.map((incident) => {
-                const isSelected = activeIncident?.id === incident.id;
-                const recAction = incident.action_recommendations?.[0]?.action_title || 'Containment Protocol Synthesis Required';
-                const riskExposure = `$${(24 * 1875).toLocaleString()} USD`;
-
-                return (
-                  <tr
-                    key={incident.id}
-                    onClick={() => selectIncident(incident.id)}
-                    style={{
-                      cursor: 'pointer',
-                      backgroundColor: isSelected ? 'rgba(56, 189, 248, 0.08)' : 'transparent',
-                      borderLeft: isSelected ? '3px solid var(--accent-primary)' : '3px solid transparent'
-                    }}
-                    className="table-row-hover"
-                  >
-                    <td className="mono" style={{ fontWeight: 600, color: 'var(--accent-primary)' }}>
-                      {incident.id}
-                    </td>
-                    <td className="mono" style={{ fontWeight: 600 }}>
-                      {incident.machine_id}
-                    </td>
-                    <td>
-                      <span className={`badge badge-${incident.severity.toLowerCase()}`}>
-                        {incident.severity}
-                      </span>
-                    </td>
-                    <td>
-                      <span className={`badge badge-${incident.status === 'CONTAINED' || incident.status === 'APPROVED' ? 'normal' : 'warning'}`}>
-                        {incident.status}
-                      </span>
-                    </td>
-                    <td style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>
-                      {new Date(incident.created_at).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}
-                    </td>
-                    <td className="mono" style={{ fontSize: '0.75rem', color: 'var(--status-critical)', fontWeight: 600 }}>
-                      {riskExposure}
-                    </td>
-                    <td style={{ maxWidth: '280px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: 'var(--text-main)' }} title={recAction}>
-                      {recAction}
-                    </td>
-                    <td style={{ textAlign: 'right' }}>
-                      <button
-                        className={`btn ${isSelected ? 'btn-primary' : 'btn-outline'}`}
-                        style={{ height: '28px', fontSize: '0.72rem', padding: '0 0.6rem' }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          selectIncident(incident.id);
-                        }}
-                      >
-                        {isSelected ? 'Inspecting' : 'Inspect'}
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Detail Section */}
-      {activeIncident ? (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          {/* Sub-Navigation Tabs */}
-          <div style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem' }}>
-            <button
-              onClick={() => setActiveTab('workspace')}
-              className={`btn ${activeTab === 'workspace' ? 'btn-primary' : 'btn-outline'}`}
-              style={{ height: '32px', fontSize: '0.78rem' }}
-            >
-              <ActivityIcon size={13} /> Investigation Workspace
-            </button>
-            <button
-              onClick={() => setActiveTab('audit')}
-              className={`btn ${activeTab === 'audit' ? 'btn-primary' : 'btn-outline'}`}
-              style={{ height: '32px', fontSize: '0.78rem' }}
-            >
-              <ShieldCheckIcon size={13} /> Decision Ledger (SHA-256)
-            </button>
-            <button
-              onClick={() => setActiveTab('explainability')}
-              className={`btn ${activeTab === 'explainability' ? 'btn-primary' : 'btn-outline'}`}
-              style={{ height: '32px', fontSize: '0.78rem' }}
-            >
-              <BrainIcon size={13} /> AI Explainability Map
-            </button>
-            <button
-              onClick={() => setActiveTab('replay')}
-              className={`btn ${activeTab === 'replay' ? 'btn-primary' : 'btn-outline'}`}
-              style={{ height: '32px', fontSize: '0.78rem' }}
-            >
-              <RewindIcon size={13} /> Time-Travel Replay
-            </button>
+      {/* 35% / 65% Operations Workstation Split */}
+      <div className="workstation-split">
+        {/* Left Side: Incident Operations Queue (35%) */}
+        <div className="workstation-queue">
+          <div className="card-header-label" style={{ marginBottom: '0.4rem', padding: '0 4px' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              <AlertTriangleIcon size={14} color="var(--critical)" /> Incident Queue
+            </span>
+            <span className="badge badge-normal">{incidents.length} Registered</span>
           </div>
 
-          {activeTab === 'audit' && <AuditLedgerViewer incidentId={activeIncident.id} />}
-          {activeTab === 'explainability' && <ExplainabilityMap incidentId={activeIncident.id} />}
-          {activeTab === 'replay' && <ReplayPlayer incidentId={activeIncident.id} />}
+          {incidents.map((incident) => {
+            const isSelected = activeIncident?.id === incident.id;
+            const riskExposure = `$${(24 * 1875).toLocaleString()} USD`;
 
-          {activeTab === 'workspace' && (
-            <>
-              {/* 1. INCIDENT HEADER */}
-              <div className="card">
+            return (
+              <div
+                key={incident.id}
+                onClick={() => selectIncident(incident.id)}
+                className={`workstation-queue-item ${isSelected ? 'active' : ''}`}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && selectIncident(incident.id)}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                  <span className="mono" style={{ fontWeight: 600, color: 'var(--accent)', fontSize: '13px' }}>
+                    {incident.id}
+                  </span>
+                  <span className={`badge badge-${incident.severity.toLowerCase()}`}>
+                    {incident.severity}
+                  </span>
+                </div>
+                <div style={{ fontWeight: 600, fontSize: '13px', color: 'var(--text-primary)', marginBottom: '0.35rem', lineHeight: 1.3 }}>
+                  {incident.title}
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11px', color: 'var(--text-muted)' }}>
+                  <span className="mono">{incident.machine_id}</span>
+                  <span className="mono" style={{ color: 'var(--critical)', fontWeight: 500 }}>{riskExposure}</span>
+                  <span className={`badge badge-${incident.status === 'CONTAINED' || incident.status === 'APPROVED' ? 'normal' : 'warning'}`} style={{ fontSize: '9px' }}>
+                    {incident.status}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Right Side: Selected Incident Case File (65%) */}
+        {activeIncident ? (
+          <div className="workstation-casefile">
+            {/* Sub-Navigation Tabs */}
+            <div style={{ display: 'flex', gap: '0.5rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.5rem', flexWrap: 'wrap' }}>
+              <button
+                onClick={() => setActiveTab('workspace')}
+                className={`btn ${activeTab === 'workspace' ? 'btn-primary' : 'btn-outline'}`}
+                style={{ height: '32px', fontSize: '12px' }}
+              >
+                <ActivityIcon size={13} /> Investigation Case File
+              </button>
+              <button
+                onClick={() => setActiveTab('audit')}
+                className={`btn ${activeTab === 'audit' ? 'btn-primary' : 'btn-outline'}`}
+                style={{ height: '32px', fontSize: '12px' }}
+              >
+                <ShieldCheckIcon size={13} /> Decision Ledger (SHA-256)
+              </button>
+              <button
+                onClick={() => setActiveTab('explainability')}
+                className={`btn ${activeTab === 'explainability' ? 'btn-primary' : 'btn-outline'}`}
+                style={{ height: '32px', fontSize: '12px' }}
+              >
+                <BrainIcon size={13} /> Explainability Map
+              </button>
+              <button
+                onClick={() => setActiveTab('replay')}
+                className={`btn ${activeTab === 'replay' ? 'btn-primary' : 'btn-outline'}`}
+                style={{ height: '32px', fontSize: '12px' }}
+              >
+                <RewindIcon size={13} /> Time-Travel Replay
+              </button>
+            </div>
+
+            {activeTab === 'audit' && <AuditLedgerViewer incidentId={activeIncident.id} />}
+            {activeTab === 'explainability' && <ExplainabilityMap incidentId={activeIncident.id} />}
+            {activeTab === 'replay' && <ReplayPlayer incidentId={activeIncident.id} />}
+
+            {activeTab === 'workspace' && (
+              <>
+                {/* 1. INCIDENT CASE FILE HEADER */}
+                <div className="card">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem', flexWrap: 'wrap', gap: '1rem' }}>
                   <div>
                     <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '0.4rem', flexWrap: 'wrap' }}>
@@ -436,7 +398,7 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
                   </div>
 
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: '1.4' }}>
-                    Statistical Z-Score: <strong style={{ color: '#fff' }}>Z = (X - μ) / σ = ({observedVibe.toFixed(2)} - 1.80) / 1.57 = +{zScoreVibe}</strong> (Threshold: Z ≥ +3.00).
+                    Statistical Z-Score: <strong style={{ color: 'var(--text-primary)' }}>Z = (X - μ) / σ = ({observedVibe.toFixed(2)} - 1.80) / 1.57 = +{zScoreVibe}</strong> (Threshold: Z ≥ +3.00).
                   </div>
                 </div>
 
@@ -473,7 +435,7 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
                   </div>
 
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: '1.4' }}>
-                    Model Calculation: <strong style={{ color: '#fff' }}>{downtimeHours.toFixed(1)} hours × ${hourlyLossRate}/hr = ${estimatedImpact.toLocaleString()} USD</strong> direct production loss.
+                    Model Calculation: <strong style={{ color: 'var(--text-primary)' }}>{downtimeHours.toFixed(1)} hours × ${hourlyLossRate}/hr = ${estimatedImpact.toLocaleString()} USD</strong> direct production loss.
                   </div>
                 </div>
               </div>
@@ -499,12 +461,12 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <span className="mono" style={{ fontSize: '0.75rem', color: 'var(--accent-primary)', background: 'rgba(56, 189, 248, 0.1)', border: '1px solid var(--border-strong)', padding: '2px 6px', borderRadius: 'var(--radius-sm)' }}>
+                          <span className="mono" style={{ fontSize: '0.75rem', color: 'var(--accent)', background: 'var(--accent-subtle)', border: '1px solid var(--border-strong)', padding: '2px 6px', borderRadius: 'var(--radius-sm)' }}>
                             {item.source_type}
                           </span>
-                          <strong style={{ fontSize: '0.92rem', color: '#fff' }}>{item.title}</strong>
+                          <strong style={{ fontSize: '0.92rem', color: 'var(--text-primary)' }}>{item.title}</strong>
                         </div>
-                        <span className="mono" style={{ fontSize: '0.8rem', color: 'var(--status-normal)', fontWeight: 600 }}>
+                        <span className="mono" style={{ fontSize: '0.8rem', color: 'var(--success)', fontWeight: 600 }}>
                           {item.confidence_score.toFixed(1)}% Confidence
                         </span>
                       </div>
@@ -528,8 +490,8 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
                     const isApproved = approvedActionIds[act.id] || act.human_approved || activeIncident.status === 'APPROVED' || activeIncident.status === 'CONTAINED';
                     return (
                       <div key={act.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                        <div style={{ background: isApproved ? 'rgba(34, 197, 94, 0.05)' : 'rgba(239, 68, 68, 0.05)', border: `1px solid ${isApproved ? 'rgba(34, 197, 94, 0.3)' : 'rgba(239, 68, 68, 0.3)'}`, padding: '1rem', borderRadius: 'var(--radius-md)' }}>
-                          <div style={{ fontWeight: 600, fontSize: '0.95rem', color: '#fff', marginBottom: '0.35rem' }}>
+                        <div style={{ background: isApproved ? 'var(--success-bg)' : 'var(--critical-bg)', border: `1px solid ${isApproved ? 'var(--success-border)' : 'var(--critical-border)'}`, padding: '1rem', borderRadius: 'var(--radius-md)' }}>
+                          <div style={{ fontWeight: 600, fontSize: '0.95rem', color: 'var(--text-primary)', marginBottom: '0.35rem' }}>
                             {act.action_title}
                           </div>
                           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.85rem', lineHeight: '1.4' }}>
@@ -586,9 +548,9 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
                   </div>
                   {sop ? (
                     <div>
-                      <h4 style={{ fontSize: '0.95rem', fontWeight: 600, marginBottom: '0.5rem', color: '#fff' }}>{sop.title}</h4>
+                      <h4 style={{ fontSize: '0.95rem', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>{sop.title}</h4>
                       <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
-                        Target Component: <span className="mono" style={{ color: 'var(--accent-primary)' }}>{sop.target_component}</span>
+                        Target Component: <span className="mono" style={{ color: 'var(--accent)' }}>{sop.target_component}</span>
                       </div>
                       <pre style={{
                         background: 'var(--bg-surface-elevated)',
@@ -618,6 +580,7 @@ export const IncidentsPage: React.FC<IncidentsPageProps> = ({ selectedIncidentId
           <p style={{ color: 'var(--text-muted)' }}>Select an incident from the queue to view detailed investigation data.</p>
         </div>
       )}
+      </div>
     </div>
   );
 };

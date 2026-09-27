@@ -3,6 +3,7 @@ import { Layout, NavigationTab } from './components/Layout';
 import { DashboardPage } from './pages/DashboardPage';
 import { IncidentsPage } from './pages/IncidentsPage';
 import { MachinesPage } from './pages/MachinesPage';
+import { AuditLedgerViewer } from './components/AuditLedgerViewer';
 import { apiService } from './services/api';
 import {
   TrendingUpIcon,
@@ -74,22 +75,22 @@ export const App: React.FC = () => {
               <span className="badge badge-normal">2 SOPs Indexed</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
-              <div style={{ padding: '1rem', background: 'var(--bg-surface-elevated)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+              <div style={{ padding: '1rem', background: 'var(--bg-surface-elevated)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span className="mono" style={{ fontWeight: 700, color: 'var(--accent-primary)' }}>SOP-M204-BEARING</span>
+                  <span className="mono" style={{ fontWeight: 700, color: 'var(--accent)' }}>SOP-M204-BEARING</span>
                   <span className="badge badge-normal">INDEXED</span>
                 </div>
-                <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#fff', marginTop: '0.4rem' }}>Hydraulic Drive & Bearing Failure Emergency Containment</div>
+                <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.4rem' }}>Hydraulic Drive & Bearing Failure Emergency Containment</div>
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                   Covers vibration spikes &gt;4.5 mm/s, bearing temperature exceeding 75°C, and auxiliary coolant flush procedures.
                 </p>
               </div>
-              <div style={{ padding: '1rem', background: 'var(--bg-surface-elevated)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
+              <div style={{ padding: '1rem', background: 'var(--bg-surface-elevated)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span className="mono" style={{ fontWeight: 700, color: 'var(--accent-primary)' }}>SOP-COOLING-PUMP</span>
+                  <span className="mono" style={{ fontWeight: 700, color: 'var(--accent)' }}>SOP-COOLING-PUMP</span>
                   <span className="badge badge-normal">INDEXED</span>
                 </div>
-                <div style={{ fontSize: '0.9rem', fontWeight: 600, color: '#fff', marginTop: '0.4rem' }}>Secondary Auxiliary Coolant Pump Failure Response</div>
+                <div style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.4rem' }}>Secondary Auxiliary Coolant Pump Failure Response</div>
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                   Covers coolant loop pressure drop below 2.0 bar and emergency bypass valve actuation.
                 </p>
@@ -109,15 +110,15 @@ export const App: React.FC = () => {
           <div className="card">
             <div className="card-header-label">
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <TrendingUpIcon size={14} color="var(--accent-primary)" /> Telemetry Predictive Signal Stream
+                <TrendingUpIcon size={14} color="var(--accent)" /> Telemetry Predictive Signal Stream
               </span>
               <span className="badge badge-normal">1 Hz Sampling</span>
             </div>
             <div style={{ padding: '2.5rem', textAlign: 'center', color: 'var(--text-muted)' }}>
-              <div style={{ display: 'inline-flex', padding: '1rem', background: 'rgba(56, 189, 248, 0.1)', borderRadius: '50%', marginBottom: '1rem', color: 'var(--accent-primary)' }}>
+              <div style={{ display: 'inline-flex', padding: '1rem', background: 'var(--accent-subtle)', borderRadius: '50%', marginBottom: '1rem', color: 'var(--accent)' }}>
                 <TrendingUpIcon size={32} />
               </div>
-              <h3 style={{ color: '#fff', fontSize: '1.1rem' }}>Continuous Statistical Anomaly Engine</h3>
+              <h3 style={{ color: 'var(--text-primary)', fontSize: '1.1rem' }}>Continuous Statistical Anomaly Engine</h3>
               <p style={{ fontSize: '0.85rem', marginTop: '0.4rem', maxWidth: '500px', margin: '0.4rem auto 0' }}>
                 Monitoring Machine M-204, M-101, M-305 at 1-second interval sampling rate with dynamic Z-score standard deviation thresholds.
               </p>
@@ -136,17 +137,17 @@ export const App: React.FC = () => {
           <div className="card">
             <div className="card-header-label">
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                <BellIcon size={14} color="var(--status-warning)" /> Active Threshold Feeds
+                <BellIcon size={14} color="var(--warning)" /> Active Threshold Feeds
               </span>
               <span className="badge badge-warning">1 Alert Active</span>
             </div>
             <div style={{ marginTop: '1rem' }}>
-              <div style={{ padding: '1rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-color)', borderLeft: '3px solid var(--status-critical)', borderRadius: 'var(--radius-md)' }}>
+              <div style={{ padding: '1rem', background: 'var(--bg-surface-elevated)', border: '1px solid var(--border)', borderLeft: '3px solid var(--critical)', borderRadius: 'var(--radius-md)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-                  <span className="mono" style={{ color: 'var(--status-critical)', fontWeight: 700 }}>ALT-M204-VIB-01</span>
+                  <span className="mono" style={{ color: 'var(--critical)', fontWeight: 700 }}>ALT-M204-VIB-01</span>
                   <span className="badge badge-critical">CRITICAL VIOLATION</span>
                 </div>
-                <div style={{ fontWeight: 600, color: '#fff' }}>M-204 Vibration Sensor &gt; 4.5 mm/s (Z-Score &gt; +3.0)</div>
+                <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>M-204 Vibration Sensor &gt; 4.5 mm/s (Z-Score &gt; +3.0)</div>
                 <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>
                   Source: Accelerometer CH-02 (Hydraulic Bearing Housing) • Correlated with Incident INC-M204-001
                 </div>
@@ -166,32 +167,32 @@ export const App: React.FC = () => {
 
           {/* SIMULATION CONTROLS SECTION */}
           <div className="card" style={{ marginBottom: '1.5rem', border: '1px solid var(--border-strong)', background: 'var(--bg-surface)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', borderBottom: '1px solid var(--border)', paddingBottom: '0.75rem' }}>
               <div>
-                <span className="badge" style={{ background: 'rgba(56, 189, 248, 0.12)', color: 'var(--accent-primary)', borderColor: 'var(--border-strong)', marginBottom: '0.35rem' }}>
+                <span className="badge" style={{ background: 'var(--accent-subtle)', color: 'var(--accent)', borderColor: 'var(--border-strong)', marginBottom: '0.35rem' }}>
                   SIMULATION CONTROL
                 </span>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#fff', margin: '0.2rem 0' }}>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-primary)', margin: '0.2rem 0' }}>
                   Scenario: M-204 Bearing Degradation
                 </h3>
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0 }}>
                   Controls telemetry injection, scenario fault triggers, and live demo state advancement.
                 </p>
               </div>
-              <div className="mono" style={{ fontSize: '0.75rem', color: 'var(--accent-primary)' }}>
+              <div className="mono" style={{ fontSize: '0.75rem', color: 'var(--accent)' }}>
                 Target Endpoint: /api/simulation
               </div>
             </div>
 
             {simActionNotice && (
-              <div style={{ padding: '0.6rem 0.85rem', background: 'rgba(34, 197, 94, 0.1)', border: '1px solid rgba(34, 197, 94, 0.3)', borderRadius: 'var(--radius-sm)', color: 'var(--status-normal)', fontSize: '0.8rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div style={{ padding: '0.6rem 0.85rem', background: 'var(--success-bg)', border: '1px solid var(--success-border)', borderRadius: 'var(--radius-sm)', color: 'var(--success)', fontSize: '0.8rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <CheckCircleIcon size={14} /> {simActionNotice}
               </div>
             )}
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem', marginTop: '1rem' }}>
-              <div style={{ background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '1rem' }}>
-                <div style={{ fontWeight: 600, fontSize: '0.88rem', color: '#fff', marginBottom: '0.25rem' }}>Trigger Failure</div>
+              <div style={{ background: 'var(--bg-surface-elevated)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '1rem' }}>
+                <div style={{ fontWeight: 600, fontSize: '0.88rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>Trigger Failure</div>
                 <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
                   Injects 7.82 mm/s vibration spike and generates active incident ticket for M-204.
                 </p>
@@ -212,8 +213,8 @@ export const App: React.FC = () => {
                 </button>
               </div>
 
-              <div style={{ background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '1rem' }}>
-                <div style={{ fontWeight: 600, fontSize: '0.88rem', color: '#fff', marginBottom: '0.25rem' }}>Advance Simulation</div>
+              <div style={{ background: 'var(--bg-surface-elevated)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '1rem' }}>
+                <div style={{ fontWeight: 600, fontSize: '0.88rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>Advance Simulation</div>
                 <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
                   Advances telemetry stream clock by 1 discrete time step.
                 </p>
@@ -234,8 +235,8 @@ export const App: React.FC = () => {
                 </button>
               </div>
 
-              <div style={{ background: 'var(--bg-surface-elevated)', border: '1px solid var(--border-color)', borderRadius: 'var(--radius-md)', padding: '1rem' }}>
-                <div style={{ fontWeight: 600, fontSize: '0.88rem', color: '#fff', marginBottom: '0.25rem' }}>Reset Scenario</div>
+              <div style={{ background: 'var(--bg-surface-elevated)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '1rem' }}>
+                <div style={{ fontWeight: 600, fontSize: '0.88rem', color: 'var(--text-primary)', marginBottom: '0.25rem' }}>Reset Scenario</div>
                 <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '0.75rem' }}>
                   Restores nominal sensor registers and resets scenario database state.
                 </p>
@@ -269,21 +270,32 @@ export const App: React.FC = () => {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem', marginTop: '1rem' }}>
               <div style={{ background: 'var(--bg-surface-elevated)', padding: '0.9rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Human-in-the-Loop Approval Policy</div>
-                <div style={{ fontWeight: 600, color: '#fff', marginTop: '0.2rem' }}>Strict Operator Authorization Gate</div>
+                <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.2rem' }}>Strict Operator Authorization Gate</div>
                 <div style={{ fontSize: '0.72rem', color: 'var(--status-normal)', marginTop: '0.25rem' }}>Actuation blocked until cryptographic signoff</div>
               </div>
               <div style={{ background: 'var(--bg-surface-elevated)', padding: '0.9rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Decision Ledger Protocol</div>
-                <div style={{ fontWeight: 600, color: '#fff', marginTop: '0.2rem' }}>SHA-256 Hash Chain Integrity</div>
+                <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.2rem' }}>SHA-256 Hash Chain Integrity</div>
                 <div style={{ fontSize: '0.72rem', color: 'var(--accent-primary)', marginTop: '0.25rem' }}>Continuous parent-child hash verification</div>
               </div>
               <div style={{ background: 'var(--bg-surface-elevated)', padding: '0.9rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
                 <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Agent Pipeline Architecture</div>
-                <div style={{ fontWeight: 600, color: '#fff', marginTop: '0.2rem' }}>Sequential 4-Stage Multi-Agent System</div>
-                <div style={{ fontSize: '0.72rem', color: 'var(--text-bright)', marginTop: '0.25rem' }}>Signal Analysis → RCA → Impact → SOP RAG</div>
+                <div style={{ fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.2rem' }}>Sequential 4-Stage Multi-Agent System</div>
+                <div style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>Signal Analysis → RCA → Impact → SOP RAG</div>
               </div>
             </div>
           </div>
+        </div>
+      )}
+      {currentTab === 'audit' && (
+        <div className="page-container">
+          <div className="page-header">
+            <div>
+              <h1 className="page-title">Cryptographic Decision Ledger</h1>
+              <p className="page-subtitle">Immutable SHA-256 parent-child decision audit trail with browser Web Crypto verification</p>
+            </div>
+          </div>
+          <AuditLedgerViewer incidentId="INC-M204-001" />
         </div>
       )}
     </Layout>

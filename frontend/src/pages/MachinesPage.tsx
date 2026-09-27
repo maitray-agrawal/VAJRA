@@ -140,12 +140,12 @@ export const MachinesPage: React.FC<MachinesPageProps> = ({ selectedMachineId })
                   <h2 style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-bright)' }}>{activeMachine.name}</h2>
                 </div>
                 <div style={{ textAlign: 'right', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                  <div>Type: <strong style={{ color: '#fff' }}>{activeMachine.type}</strong></div>
-                  <div>Location: <strong style={{ color: '#fff' }}>{activeMachine.location}</strong></div>
+                  <div>Type: <strong style={{ color: 'var(--text-primary)' }}>{activeMachine.type}</strong></div>
+                  <div>Location: <strong style={{ color: 'var(--text-primary)' }}>{activeMachine.location}</strong></div>
                 </div>
               </div>
               {activeMachine.description && (
-                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', borderTop: '1px solid var(--border-color)', paddingTop: '0.75rem', margin: 0 }}>
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', borderTop: '1px solid var(--border)', paddingTop: '0.75rem', margin: 0 }}>
                   {activeMachine.description}
                 </p>
               )}
@@ -155,7 +155,7 @@ export const MachinesPage: React.FC<MachinesPageProps> = ({ selectedMachineId })
             <div className="card">
               <div className="card-title">
                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <ActivityIcon size={14} color="var(--accent-primary)" /> Recent Telemetry Registers
+                  <ActivityIcon size={14} color="var(--accent)" /> Recent Telemetry Registers
                 </span>
                 <span className="badge badge-normal" style={{ fontSize: '0.72rem' }}>
                   {activeMachine.recent_telemetry.length} Records Loaded
@@ -174,14 +174,14 @@ export const MachinesPage: React.FC<MachinesPageProps> = ({ selectedMachineId })
                   </thead>
                   <tbody>
                     {activeMachine.recent_telemetry.map((t) => (
-                      <tr key={t.id} style={{ background: t.is_anomaly ? 'rgba(239, 68, 68, 0.08)' : 'transparent' }}>
+                      <tr key={t.id} style={{ background: t.is_anomaly ? 'var(--critical-bg)' : 'transparent' }}>
                         <td className="mono" style={{ fontSize: '0.8rem' }}>
                           {new Date(t.timestamp).toLocaleTimeString()}
                         </td>
-                        <td className="mono" style={{ fontWeight: 600, color: t.vibration_mm_s > 4.0 ? 'var(--status-critical)' : 'inherit' }}>
+                        <td className="mono" style={{ fontWeight: 600, color: t.vibration_mm_s > 4.0 ? 'var(--critical)' : 'inherit' }}>
                           {t.vibration_mm_s.toFixed(2)} mm/s
                         </td>
-                        <td className="mono" style={{ color: t.temp_celsius > 80.0 ? 'var(--status-warning)' : 'inherit' }}>
+                        <td className="mono" style={{ color: t.temp_celsius > 80.0 ? 'var(--warning)' : 'inherit' }}>
                           {t.temp_celsius.toFixed(1)} °C
                         </td>
                         <td className="mono">{t.output_units_min.toFixed(1)} units/min</td>
@@ -207,7 +207,7 @@ export const MachinesPage: React.FC<MachinesPageProps> = ({ selectedMachineId })
             <div className="card">
               <div className="card-title">
                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <WrenchIcon size={14} color="var(--status-warning)" /> Historical Maintenance Logs
+                  <WrenchIcon size={14} color="var(--warning)" /> Historical Maintenance Logs
                 </span>
                 <span className="badge badge-normal" style={{ fontSize: '0.72rem' }}>
                   {activeMachine.maintenance_records.length} History Logs
@@ -220,21 +220,21 @@ export const MachinesPage: React.FC<MachinesPageProps> = ({ selectedMachineId })
                       key={m.id}
                       style={{
                         backgroundColor: 'var(--bg-surface-secondary)',
-                        border: '1px solid var(--border-color)',
+                        border: '1px solid var(--border)',
                         borderRadius: 'var(--radius-sm)',
                         padding: '0.85rem'
                       }}
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                          <span className="mono" style={{ fontSize: '0.78rem', color: 'var(--accent-primary)', fontWeight: 600 }}>{m.id}</span>
-                          <strong style={{ fontSize: '0.88rem', color: 'var(--text-bright)' }}>{m.component}</strong>
+                          <span className="mono" style={{ fontSize: '0.78rem', color: 'var(--accent)', fontWeight: 600 }}>{m.id}</span>
+                          <strong style={{ fontSize: '0.88rem', color: 'var(--text-primary)' }}>{m.component}</strong>
                         </div>
                         <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-                          Technician: <strong style={{ color: 'var(--text-main)' }}>{m.technician}</strong> • {new Date(m.timestamp).toLocaleDateString()}
+                          Technician: <strong style={{ color: 'var(--text-primary)' }}>{m.technician}</strong> • {new Date(m.timestamp).toLocaleDateString()}
                         </span>
                       </div>
-                      <div style={{ fontSize: '0.82rem', color: 'var(--accent-primary)', fontWeight: 500, marginBottom: '0.2rem' }}>
+                      <div style={{ fontSize: '0.82rem', color: 'var(--accent)', fontWeight: 500, marginBottom: '0.2rem' }}>
                         Action: {m.action_taken}
                       </div>
                       <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', margin: 0 }}>{m.notes}</p>

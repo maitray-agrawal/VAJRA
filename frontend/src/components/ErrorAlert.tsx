@@ -74,7 +74,7 @@ export const ErrorAlert: React.FC<ErrorAlertProps> = ({
           >
             <div>
               <span style={{ color: 'var(--text-dim)', textTransform: 'uppercase', fontSize: '0.68rem' }}>Service</span>
-              <div className="mono" style={{ color: '#fff', fontWeight: 600, marginTop: '2px' }}>{service}</div>
+              <div className="mono" style={{ color: 'var(--text-primary)', fontWeight: 600, marginTop: '2px' }}>{service}</div>
             </div>
             <div>
               <span style={{ color: 'var(--text-dim)', textTransform: 'uppercase', fontSize: '0.68rem' }}>Endpoint State</span>

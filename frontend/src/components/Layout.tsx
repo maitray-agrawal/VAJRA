@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { apiService } from '../services/api';
 import { DemoGuideModal } from './DemoGuideModal';
+import { AppearanceControl } from './AppearanceControl';
+import { CommandPaletteModal } from './CommandPaletteModal';
 import {
   SearchIcon,
   ActivityIcon,
@@ -10,10 +12,13 @@ import {
   TrendingUpIcon,
   BellIcon,
   SlidersIcon,
-  CompassIcon
+  CompassIcon,
+  ShieldCheckIcon,
+  MenuIcon,
+  XIcon
 } from './Icons';
 
-export type NavigationTab = 'dashboard' | 'incidents' | 'machines' | 'sops' | 'analytics' | 'alerts' | 'settings';
+export type NavigationTab = 'dashboard' | 'incidents' | 'machines' | 'sops' | 'analytics' | 'alerts' | 'settings' | 'audit';
 
 interface LayoutProps {
   currentTab: NavigationTab;
@@ -29,8 +34,23 @@ export const Layout: React.FC<LayoutProps> = ({
   activeIncidentCount = 1
 }) => {
   const [isDemoGuideOpen, setIsDemoGuideOpen] = useState<boolean>(false);
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState<boolean>(false);
   const [systemHealthy, setSystemHealthy] = useState<boolean | null>(true);
 
+  // Global Ctrl+K / Cmd+K listener
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setIsSearchOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // System Health Polling
   useEffect(() => {
     let isMounted = true;
     const checkSystemHealth = async () => {
@@ -54,24 +74,47 @@ export const Layout: React.FC<LayoutProps> = ({
     };
   }, []);
 
+  const handleTabSelect = (tab: NavigationTab) => {
+    onSelectTab(tab);
+    setIsMobileSidebarOpen(false);
+  };
+
   return (
     <div className="app-layout">
+      {/* Mobile Backdrop */}
+      {isMobileSidebarOpen && (
+        <div
+          className="sidebar-backdrop"
+          onClick={() => setIsMobileSidebarOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Sidebar Navigation */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${isMobileSidebarOpen ? 'open' : ''}`} aria-label="Operations Navigation Rail">
         <div className="sidebar-header">
           <div className="sidebar-logo">V</div>
-          <div>
+          <div style={{ flex: 1, minWidth: 0 }}>
             <div className="sidebar-brand-title">VAJRA</div>
             <div className="sidebar-brand-sub">Agentic Industrial Crisis Response</div>
           </div>
+          {isMobileSidebarOpen && (
+            <button
+              onClick={() => setIsMobileSidebarOpen(false)}
+              style={{ background: 'transparent', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: '4px' }}
+              aria-label="Close sidebar"
+            >
+              <XIcon size={18} />
+            </button>
+          )}
         </div>
 
         <nav className="sidebar-nav">
-          <div className="nav-section-title">Core Operations</div>
-          
+          <div className="nav-section-title">Operations</div>
+
           <button
             className={`sidebar-item ${currentTab === 'dashboard' ? 'active' : ''}`}
-            onClick={() => onSelectTab('dashboard')}
+            onClick={() => handleTabSelect('dashboard')}
           >
             <span className="sidebar-item-label">
               <span className="item-icon"><ActivityIcon size={16} /></span>
@@ -81,7 +124,7 @@ export const Layout: React.FC<LayoutProps> = ({
 
           <button
             className={`sidebar-item ${currentTab === 'incidents' ? 'active' : ''}`}
-            onClick={() => onSelectTab('incidents')}
+            onClick={() => handleTabSelect('incidents')}
           >
             <span className="sidebar-item-label">
               <span className="item-icon"><AlertTriangleIcon size={16} /></span>
@@ -94,7 +137,7 @@ export const Layout: React.FC<LayoutProps> = ({
 
           <button
             className={`sidebar-item ${currentTab === 'machines' ? 'active' : ''}`}
-            onClick={() => onSelectTab('machines')}
+            onClick={() => handleTabSelect('machines')}
           >
             <span className="sidebar-item-label">
               <span className="item-icon"><CpuIcon size={16} /></span>
@@ -102,11 +145,11 @@ export const Layout: React.FC<LayoutProps> = ({
             </span>
           </button>
 
-          <div className="nav-section-title">Intelligence & SOPs</div>
+          <div className="nav-section-title">Intelligence</div>
 
           <button
             className={`sidebar-item ${currentTab === 'sops' ? 'active' : ''}`}
-            onClick={() => onSelectTab('sops')}
+            onClick={() => handleTabSelect('sops')}
           >
             <span className="sidebar-item-label">
               <span className="item-icon"><BookOpenIcon size={16} /></span>
@@ -116,7 +159,7 @@ export const Layout: React.FC<LayoutProps> = ({
 
           <button
             className={`sidebar-item ${currentTab === 'analytics' ? 'active' : ''}`}
-            onClick={() => onSelectTab('analytics')}
+            onClick={() => handleTabSelect('analytics')}
           >
             <span className="sidebar-item-label">
               <span className="item-icon"><TrendingUpIcon size={16} /></span>
@@ -126,7 +169,7 @@ export const Layout: React.FC<LayoutProps> = ({
 
           <button
             className={`sidebar-item ${currentTab === 'alerts' ? 'active' : ''}`}
-            onClick={() => onSelectTab('alerts')}
+            onClick={() => handleTabSelect('alerts')}
           >
             <span className="sidebar-item-label">
               <span className="item-icon"><BellIcon size={16} /></span>
@@ -138,18 +181,34 @@ export const Layout: React.FC<LayoutProps> = ({
 
           <button
             className={`sidebar-item ${currentTab === 'settings' ? 'active' : ''}`}
-            onClick={() => onSelectTab('settings')}
+            onClick={() => handleTabSelect('settings')}
           >
             <span className="sidebar-item-label">
               <span className="item-icon"><SlidersIcon size={16} /></span>
               Control Config
             </span>
           </button>
+
+          <button
+            className={`sidebar-item ${currentTab === 'audit' ? 'active' : ''}`}
+            onClick={() => handleTabSelect('audit')}
+          >
+            <span className="sidebar-item-label">
+              <span className="item-icon"><ShieldCheckIcon size={16} /></span>
+              Audit Ledger
+            </span>
+          </button>
         </nav>
 
         <div className="sidebar-footer">
-          <div style={{ color: 'var(--text-main)', fontWeight: 600, fontSize: '0.78rem' }}>Plant B — Main Line</div>
+          <div className="sidebar-system-status">
+            <span className={`status-dot ${systemHealthy === false ? 'critical' : 'normal'}`} />
+            <span>{systemHealthy === false ? 'Connection degraded' : 'Operational'}</span>
+          </div>
+
+          <div style={{ color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.78rem' }}>Plant B — Main Line</div>
           <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '2px' }}>Mode: Human-in-the-Loop</div>
+
           <button
             onClick={() => setIsDemoGuideOpen(true)}
             className="btn btn-outline"
@@ -167,21 +226,37 @@ export const Layout: React.FC<LayoutProps> = ({
         </div>
       </aside>
 
-      {/* Main Wrapper */}
+      {/* Main Content Area */}
       <div className="main-wrapper">
         {/* Top Header Bar */}
         <header className="top-header">
-          <div className="search-box">
-            <SearchIcon size={14} color="var(--text-muted)" />
-            <input type="text" placeholder="Search assets, telemetry, incident IDs..." readOnly />
-            <span className="search-shortcut">Ctrl+K</span>
+          <div className="top-header-left">
+            <button
+              className="mobile-menu-trigger"
+              onClick={() => setIsMobileSidebarOpen(true)}
+              aria-label="Open Navigation Menu"
+            >
+              <MenuIcon size={18} />
+            </button>
+
+            {/* Global Search Command Trigger */}
+            <button
+              type="button"
+              className="search-box-btn"
+              onClick={() => setIsSearchOpen(true)}
+              aria-label="Search assets, telemetry, incident IDs"
+            >
+              <SearchIcon size={14} color="var(--text-muted)" />
+              <span className="search-box-text">Search assets, telemetry, incident IDs...</span>
+              <span className="search-shortcut">⌘K</span>
+            </button>
           </div>
 
           <div className="top-header-actions">
             {/* System Status Indicator */}
             <div className="status-indicator">
               <span className={`status-dot ${systemHealthy === false ? 'critical' : 'normal'}`} />
-              <span>{systemHealthy === false ? 'API offline' : 'System operational'}</span>
+              <span>{systemHealthy === false ? 'Connection degraded' : 'System operational'}</span>
             </div>
 
             {/* Ledger Status Indicator */}
@@ -190,11 +265,14 @@ export const Layout: React.FC<LayoutProps> = ({
               <span>Ledger verified</span>
             </div>
 
+            {/* Premium Appearance Control */}
+            <AppearanceControl />
+
             {/* Operator Identity */}
             <div className="operator-profile">
               <div className="avatar-circle">OP</div>
               <div>
-                <div style={{ fontWeight: 600, fontSize: '0.78rem', color: 'var(--text-main)', lineHeight: 1.2 }}>Shift Lead</div>
+                <div style={{ fontWeight: 600, fontSize: '0.78rem', color: 'var(--text-primary)', lineHeight: 1.2 }}>Shift Lead</div>
                 <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Site Operator #42</div>
               </div>
             </div>
@@ -207,12 +285,21 @@ export const Layout: React.FC<LayoutProps> = ({
         </main>
       </div>
 
+      {/* Command Palette Modal */}
+      <CommandPaletteModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        onSelect={(tab) => {
+          handleTabSelect(tab);
+        }}
+      />
+
       {/* Demo Guide Walkthrough Modal */}
       <DemoGuideModal
         isOpen={isDemoGuideOpen}
         onClose={() => setIsDemoGuideOpen(false)}
         onNavigateToTab={(tab) => {
-          onSelectTab(tab);
+          handleTabSelect(tab);
         }}
       />
     </div>

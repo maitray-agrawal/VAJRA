@@ -100,8 +100,8 @@ export const AuditLedgerViewer: React.FC<AuditLedgerViewerProps> = ({ incidentId
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.75rem' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.25rem' }}>
-            <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-bright)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ color: 'var(--accent-primary)' }}><ShieldCheckIcon size={18} /></span>
+            <h3 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-primary)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              <span style={{ color: 'var(--accent)' }}><ShieldCheckIcon size={18} /></span>
               SHA-256 Decision Ledger & Audit Trail
             </h3>
             {/* Derived Ledger Status Badge */}
@@ -178,7 +178,7 @@ export const AuditLedgerViewer: React.FC<AuditLedgerViewerProps> = ({ incidentId
         <div className="table-container">
           <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.8rem' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '0.72rem', textTransform: 'uppercase' }}>
+              <tr style={{ borderBottom: '1px solid var(--border)', color: 'var(--text-muted)', fontSize: '0.72rem', textTransform: 'uppercase' }}>
                 <th style={{ padding: '0.6rem 0.5rem' }}>Block ID</th>
                 <th style={{ padding: '0.6rem 0.5rem' }}>Timestamp</th>
                 <th style={{ padding: '0.6rem 0.5rem' }}>Actor</th>
@@ -197,19 +197,19 @@ export const AuditLedgerViewer: React.FC<AuditLedgerViewerProps> = ({ incidentId
                   <tr
                     key={log.id}
                     style={{
-                      borderBottom: '1px solid rgba(255,255,255,0.05)',
+                      borderBottom: '1px solid var(--border)',
                       transition: 'background-color 0.15s ease',
-                      background: isTampered ? 'rgba(239, 68, 68, 0.15)' : 'transparent'
+                      background: isTampered ? 'var(--critical-bg)' : 'transparent'
                     }}
                     className="table-row-hover"
                   >
-                    <td className="mono" style={{ padding: '0.65rem 0.5rem', color: 'var(--accent-primary)', fontWeight: 600 }}>
+                    <td className="mono" style={{ padding: '0.65rem 0.5rem', color: 'var(--accent)', fontWeight: 600 }}>
                       {log.id}
                     </td>
-                    <td style={{ padding: '0.65rem 0.5rem', color: 'var(--text-bright)' }}>
+                    <td style={{ padding: '0.65rem 0.5rem', color: 'var(--text-primary)' }}>
                       {new Date(log.timestamp).toLocaleTimeString()}
                     </td>
-                    <td style={{ padding: '0.65rem 0.5rem', color: '#f59e0b' }}>
+                    <td style={{ padding: '0.65rem 0.5rem', color: 'var(--warning)' }}>
                       <span className="mono">{log.actor_type}:{log.actor_id}</span>
                     </td>
                     <td style={{ padding: '0.65rem 0.5rem' }}>
@@ -219,7 +219,7 @@ export const AuditLedgerViewer: React.FC<AuditLedgerViewerProps> = ({ incidentId
                     </td>
                     <td style={{ padding: '0.65rem 0.5rem' }}>
                       {isGenesis ? (
-                        <span className="badge" style={{ fontSize: '0.65rem', background: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa', borderColor: 'rgba(59, 130, 246, 0.3)' }}>
+                        <span className="badge" style={{ fontSize: '0.65rem', background: 'var(--accent-subtle)', color: 'var(--accent)', borderColor: 'var(--border-strong)' }}>
                           GENESIS BLOCK
                         </span>
                       ) : (
@@ -238,13 +238,13 @@ export const AuditLedgerViewer: React.FC<AuditLedgerViewerProps> = ({ incidentId
                         onClick={() => handleOpenInspector(log, index)}
                         className="mono"
                         style={{
-                          color: isTampered ? '#ef4444' : '#4ade80',
+                          color: isTampered ? 'var(--critical)' : 'var(--success)',
                           cursor: 'pointer',
                           fontWeight: 600,
-                          background: isTampered ? 'rgba(239,68,68,0.2)' : 'rgba(34, 197, 94, 0.1)',
+                          background: isTampered ? 'var(--critical-bg)' : 'var(--success-bg)',
                           padding: '2px 6px',
                           borderRadius: '4px',
-                          border: `1px solid ${isTampered ? 'rgba(239,68,68,0.4)' : 'rgba(34, 197, 94, 0.3)'}`
+                          border: `1px solid ${isTampered ? 'var(--critical-border)' : 'var(--success-border)'}`
                         }}
                         title={log.current_hash}
                       >

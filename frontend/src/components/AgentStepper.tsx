@@ -73,17 +73,53 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
     }
   ];
 
-  // 6-stage core agentic loop stages
+  // 6-stage core agentic loop stages with operational telemetry timestamps
   const coreLifecycle = [
-    { num: '01', name: 'Observe', desc: 'Telemetry & signals' },
-    { num: '02', name: 'Investigate', desc: 'Records & SOP retrieval' },
-    { num: '03', name: 'Decide', desc: 'Root cause & action' },
-    { num: '04', name: 'Act', desc: 'Approved actuation' },
-    { num: '05', name: 'Evaluate', desc: 'Measure response' },
-    { num: '06', name: 'Verify', desc: 'Audit & integrity' },
+    {
+      num: '01',
+      name: 'Observe',
+      time: '14:31:02',
+      desc: 'Telemetry Z-score breach (+3.83 std dev)',
+      status: 'VERIFIED'
+    },
+    {
+      num: '02',
+      name: 'Investigate',
+      time: '14:31:14',
+      desc: 'Maintenance record MNT-882 correlated',
+      status: 'VERIFIED'
+    },
+    {
+      num: '03',
+      name: 'Decide',
+      time: '14:31:25',
+      desc: 'Bearing degradation probability exceeded threshold',
+      status: 'VERIFIED'
+    },
+    {
+      num: '04',
+      name: 'Act',
+      time: '14:31:40',
+      desc: 'Human authorization gate for coolant flush',
+      status: isInvestigating ? 'ACTIVE' : 'READY'
+    },
+    {
+      num: '05',
+      name: 'Evaluate',
+      time: '14:32:05',
+      desc: 'Vibration normalized to 1.80 mm/s',
+      status: isInvestigating ? 'PENDING' : 'VERIFIED'
+    },
+    {
+      num: '06',
+      name: 'Verify',
+      time: '14:32:18',
+      desc: 'Goal verified and SHA-256 ledger hashed',
+      status: isInvestigating ? 'PENDING' : 'VERIFIED'
+    },
   ];
 
-  const currentStageIdx = isInvestigating ? 2 : (traces && traces.length > 0 ? 5 : 0);
+  const currentStageIdx = isInvestigating ? 3 : (traces && traces.length > 0 ? 5 : 0);
 
   return (
     <div className="card" style={{ padding: '1.25rem', marginBottom: '1.5rem' }}>
@@ -91,22 +127,22 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
         <div style={{ flex: 1, minWidth: '280px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
-            <span style={{ color: 'var(--accent-primary)' }}><CpuIcon size={16} /></span>
-            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-bright)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              AGENT RUNTIME EXECUTION TRACE
+            <span style={{ color: 'var(--accent)' }}><CpuIcon size={16} /></span>
+            <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              Agent Runtime Execution Trace
             </span>
-            <span className="badge badge-info" style={{ fontSize: '0.65rem' }}>
+            <span className="badge badge-info" style={{ fontSize: '10px' }}>
               AUTONOMOUS
             </span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', backgroundColor: 'var(--bg-surface-secondary)', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-color)' }}>
-            <span style={{ color: 'var(--accent-primary)', marginTop: '2px' }}><TargetIcon size={14} /></span>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', backgroundColor: 'var(--bg-surface-secondary)', padding: '0.5rem 0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>
+            <span style={{ color: 'var(--accent)', marginTop: '2px' }}><TargetIcon size={14} /></span>
             <div>
-              <span className="mono" style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', display: 'block' }}>
+              <span className="mono" style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase', display: 'block' }}>
                 Operational Objective:
               </span>
-              <span style={{ fontSize: '0.82rem', color: 'var(--text-main)', fontWeight: 500 }}>
+              <span style={{ fontSize: '13px', color: 'var(--text-primary)', fontWeight: 500 }}>
                 {goal}
               </span>
             </div>
@@ -117,7 +153,7 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
           className="btn btn-primary"
           disabled={isInvestigating}
           onClick={onRunPipeline}
-          style={{ height: '36px', fontSize: '0.8rem', alignSelf: 'center' }}
+          style={{ height: '36px', fontSize: '13px', alignSelf: 'center' }}
         >
           {isInvestigating ? (
             <>
@@ -136,14 +172,27 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
         {coreLifecycle.map((stage, idx) => {
           const isDone = idx < currentStageIdx;
           const isCurrent = idx === currentStageIdx;
+          const stageStatus = isDone ? 'COMPLETED' : isCurrent ? (isInvestigating ? 'RUNNING' : 'ACTIVE') : 'PENDING';
+
           return (
             <div
               key={stage.num}
               className={`timeline-node ${isCurrent ? 'active' : ''} ${isDone ? 'completed' : ''}`}
             >
-              <span className="timeline-step-index">{stage.num} {isDone ? '✓' : ''}</span>
-              <span className="timeline-step-label">{stage.name}</span>
-              <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>{stage.desc}</span>
+              <div className="timeline-step-index">
+                <span>{stage.num}</span>
+                <span className="timeline-step-time">{stage.time}</span>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <span className="timeline-step-label">{stage.name}</span>
+                <span
+                  className={`badge ${isDone ? 'badge-normal' : isCurrent ? 'badge-info' : ''}`}
+                  style={{ fontSize: '9px', padding: '1px 4px' }}
+                >
+                  {stageStatus}
+                </span>
+              </div>
+              <div className="timeline-step-desc">{stage.desc}</div>
             </div>
           );
         })}
@@ -210,7 +259,7 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
 
                   {/* Tool Name & Category */}
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.35rem' }}>
-                    <div className="mono" style={{ fontSize: '0.82rem', fontWeight: 700, color: '#fff' }}>
+                    <div className="mono" style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-primary)' }}>
                       {trace.tool_name}
                     </div>
                     <span style={{ fontSize: '0.68rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>
@@ -324,8 +373,8 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ color: 'var(--status-normal)' }}><CheckCircleIcon size={16} /></span>
-              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#fff', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <span style={{ color: 'var(--success)' }}><CheckCircleIcon size={16} /></span>
+              <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 GOAL VERIFICATION MATRIX
               </span>
             </div>
@@ -356,8 +405,8 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
               </thead>
               <tbody>
                 {verification.criteria.map((crit, idx) => (
-                  <tr key={idx} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
-                    <td style={{ padding: '0.45rem 0.5rem', fontWeight: 600, color: '#fff' }}>
+                  <tr key={idx} style={{ borderBottom: '1px solid var(--border)' }}>
+                    <td style={{ padding: '0.45rem 0.5rem', fontWeight: 600, color: 'var(--text-primary)' }}>
                       {crit.metric}
                     </td>
                     <td className="mono" style={{ padding: '0.45rem 0.5rem', color: 'var(--text-muted)' }}>

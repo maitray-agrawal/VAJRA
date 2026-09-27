@@ -203,7 +203,7 @@ export const ReplayPlayer: React.FC<ReplayPlayerProps> = ({ incidentId }) => {
             {new Date(currentStep.timestamp).toLocaleTimeString()}
           </span>
         </div>
-        <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#fff', marginBottom: '0.5rem' }}>
+        <div style={{ fontSize: '0.92rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
           {currentStep.event_title}
         </div>
         {currentStep.details && (

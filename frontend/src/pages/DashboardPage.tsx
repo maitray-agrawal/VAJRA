@@ -9,7 +9,6 @@ import {
   SearchIcon,
   BookOpenIcon,
   TrendingUpIcon,
-  CpuIcon,
   ChevronRightIcon
 } from '../components/Icons';
 
@@ -157,74 +156,75 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         </div>
       )}
 
-      {/* Operational Summary Grid */}
-      <div className="dashboard-grid">
-        <div className="card">
-          <div className="card-header-label">
-            <span>Fleet Monitored Assets</span>
-            <span className="badge badge-normal">3 Active</span>
+      {/* Operational Summary Registers */}
+      <div className="kpi-registers-container">
+        <div className="kpi-register">
+          <div className="kpi-register-header">
+            <span className="kpi-register-label">Fleet monitored</span>
+            <span className="badge badge-normal">3 active</span>
           </div>
-          <div className="metric-value">
-            {machines.length} <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 400 }}>Units</span>
+          <div className="kpi-register-val">
+            {machines.length} <span style={{ fontSize: '13px', color: 'var(--text-muted)', fontWeight: 400 }}>Units</span>
           </div>
-          <div className="metric-desc">Continuous telemetry stream online</div>
+          <div className="kpi-register-sub">Continuous 1 Hz telemetry online</div>
         </div>
 
-        <div className="card">
-          <div className="card-header-label">
-            <span>Anomalous Assets</span>
-            <span style={{ color: criticalMachineCount > 0 ? 'var(--status-critical)' : 'var(--status-normal)', fontWeight: 600 }}>
-              {criticalMachineCount > 0 ? 'Critical Attention' : 'All Clear'}
+        <div className="kpi-register">
+          <div className="kpi-register-header">
+            <span className="kpi-register-label">Anomalous assets</span>
+            <span className={`badge badge-${criticalMachineCount > 0 ? 'critical' : 'normal'}`}>
+              {criticalMachineCount > 0 ? 'Critical attention' : 'Nominal'}
             </span>
           </div>
-          <div className="metric-value" style={{ color: criticalMachineCount > 0 ? 'var(--status-critical)' : 'var(--status-normal)' }}>
+          <div className="kpi-register-val" style={{ color: criticalMachineCount > 0 ? 'var(--critical)' : 'var(--success)' }}>
             {criticalMachineCount}
           </div>
-          <div className="metric-desc">Machine M-204 bearing degradation</div>
+          <div className="kpi-register-sub">Machine M-204 bearing degradation</div>
         </div>
 
-        <div className="card">
-          <div className="card-header-label">
-            <span>M-204 Peak Vibration</span>
+        <div className="kpi-register">
+          <div className="kpi-register-header">
+            <span className="kpi-register-label">Peak vibration</span>
             <span className="badge badge-critical">+132.8%</span>
           </div>
-          <div className="metric-value" style={{ color: 'var(--status-critical)' }}>
-            {latestM204Vibration.toFixed(2)} <span style={{ fontSize: '0.85rem' }}>mm/s</span>
+          <div className="kpi-register-val" style={{ color: 'var(--critical)' }}>
+            {latestM204Vibration.toFixed(2)} <span style={{ fontSize: '13px', fontWeight: 400 }}>mm/s</span>
           </div>
-          <div className="metric-desc">Baseline Limit: 2.50 mm/s</div>
+          <div className="kpi-register-sub">Threshold limit: 2.50 mm/s</div>
         </div>
 
-        <div className="card">
-          <div className="card-header-label">
-            <span>Agentic Lifecycle</span>
+        <div className="kpi-register">
+          <div className="kpi-register-header">
+            <span className="kpi-register-label">Agentic lifecycle</span>
             <span className="badge badge-info">AUTONOMOUS</span>
           </div>
-          <div className="metric-value" style={{ color: 'var(--accent-primary)' }}>
+          <div className="kpi-register-val" style={{ color: 'var(--accent)' }}>
             READY
           </div>
-          <div className="metric-desc">6-Stage Closed-Loop Response Protocol</div>
+          <div className="kpi-register-sub">6-stage response protocol</div>
         </div>
       </div>
 
-      {/* Decision Support Shortcuts */}
+      {/* Decision Support Section */}
       <div className="card" style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-            <div style={{ color: 'var(--accent-primary)' }}><CpuIcon size={18} /></div>
-            <div>
-              <div style={{ fontWeight: 600, color: 'var(--text-bright)', fontSize: '0.85rem' }}>VAJRA Decision Support Shortcuts</div>
-              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Direct investigation workflows for shift operators</div>
-            </div>
+          <div>
+            <h3 style={{ fontSize: '15px', fontWeight: 600, color: 'var(--text-primary)', margin: 0 }}>
+              Decision support
+            </h3>
+            <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: '2px 0 0 0' }}>
+              Direct investigation workflows for shift operators
+            </p>
           </div>
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            <button className="btn btn-outline" style={{ height: '32px', fontSize: '0.75rem' }} onClick={() => onNavigateToIncident('INC-M204-001')}>
-              <ActivityIcon size={12} /> Summarize M-204 Root Cause
+            <button className="btn btn-outline" style={{ height: '32px', fontSize: '12px' }} onClick={() => onNavigateToIncident('INC-M204-001')}>
+              <ActivityIcon size={13} /> Summarize root cause
             </button>
-            <button className="btn btn-outline" style={{ height: '32px', fontSize: '0.75rem' }} onClick={() => onNavigateToIncident('INC-M204-001')}>
-              <BookOpenIcon size={12} /> Fetch Emergency SOP
+            <button className="btn btn-outline" style={{ height: '32px', fontSize: '12px' }} onClick={() => onNavigateToIncident('INC-M204-001')}>
+              <BookOpenIcon size={13} /> Fetch emergency SOP
             </button>
-            <button className="btn btn-outline" style={{ height: '32px', fontSize: '0.75rem' }} onClick={() => onNavigateToMachine('M-204')}>
-              <TrendingUpIcon size={12} /> Check Vibration Z-Score
+            <button className="btn btn-outline" style={{ height: '32px', fontSize: '12px' }} onClick={() => onNavigateToMachine('M-204')}>
+              <TrendingUpIcon size={13} /> Check vibration Z-score
             </button>
           </div>
         </div>

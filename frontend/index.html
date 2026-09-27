@@ -4,16 +4,28 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VAJRA — Agentic Industrial Crisis Response</title>
-    <meta name="description" content="VAJRA investigates industrial incidents, evaluates operational evidence, recommends recovery actions and maintains an auditable decision trail." />
-    <meta name="theme-color" content="#080A0D" />
-    <meta property="og:title" content="VAJRA — Agentic Industrial Crisis Response" />
-    <meta property="og:description" content="VAJRA investigates industrial incidents, evaluates operational evidence, recommends recovery actions and maintains an auditable decision trail." />
+    <title>VAJRA — Industrial Crisis Response</title>
+    <meta name="description" content="VAJRA is an agentic industrial command center for telemetry monitoring, anomaly investigation, incident response and auditable operational decisions." />
+    <meta name="theme-color" content="#0B0C0E" />
+    <meta property="og:title" content="VAJRA — Industrial Crisis Response" />
+    <meta property="og:description" content="VAJRA is an agentic industrial command center for telemetry monitoring, anomaly investigation, incident response and auditable operational decisions." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://vajra-astra.onrender.com/" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Inline theme initializer to eliminate flash of unstyled theme (FOUC) -->
+    <script>
+      (function() {
+        try {
+          var stored = localStorage.getItem('vajra-theme') || 'system';
+          if (stored === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+          } else if (stored === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+          } else {
+            document.documentElement.removeAttribute('data-theme');
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
