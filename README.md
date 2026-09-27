@@ -17,7 +17,7 @@
 
 ### Live Deployment & Access
 
-* **Live Demo (Frontend)**: [<NEW_VAJRA_FRONTEND_URL>](<NEW_VAJRA_FRONTEND_URL>)
+* **Live Demo (Frontend)**: [https://vajra-astra.onrender.com/](https://vajra-astra.onrender.com/)
 * **Backend API**: [https://crisisops-api.onrender.com](https://crisisops-api.onrender.com) (API Docs: [https://crisisops-api.onrender.com/docs](https://crisisops-api.onrender.com/docs))
 * **Repository**: [https://github.com/maitray-agrawal/VAJRA](https://github.com/maitray-agrawal/VAJRA)
 

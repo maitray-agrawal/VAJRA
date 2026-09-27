@@ -10,7 +10,7 @@ This document provides complete, step-by-step instructions for deploying **VAJRA
                           ┌───────────────────────────────┐
                           │   Render Static Site          │
                           │   (React 18 + Vite 5 SPA)     │
-                          │   <NEW_VAJRA_FRONTEND_URL>    │
+                          │   https://vajra-astra.onrender.com/ │
                           └──────────────┬────────────────┘
                                          │
                                    HTTPS / REST API
@@ -79,7 +79,7 @@ If deploying manually without Blueprint:
 | `ENV` | `production` | Enables production runtime mode |
 | `DEBUG` | `False` | Disables debug logs & stack trace leak |
 | `DATABASE_URL` | `sqlite:///./crisisops.db` | Local SQLite database file path |
-| `CORS_ORIGINS` | `<NEW_VAJRA_FRONTEND_URL>` | Allowed CORS origins (or `*`) |
+| `CORS_ORIGINS` | `https://vajra-astra.onrender.com` | Allowed CORS origins (or `*`) |
 
 ---
 
@@ -88,7 +88,7 @@ If deploying manually without Blueprint:
 | Configuration Field | Value |
 | :--- | :--- |
 | **Service Type** | Static Site |
-| **Name** | `vajra` |
+| **Name** | `vajra-astra` |
 | **Environment** | Static |
 | **Root Directory** | `frontend` |
 | **Build Command** | `npm install && npm run build` |
