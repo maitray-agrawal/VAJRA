@@ -1,5 +1,5 @@
 """
-Centralized Tool Registry for CrisisOps Agent Runtime.
+Centralized Tool Registry for VAJRA Agent Runtime.
 Exposes observation, investigation, action, and verification tools
 with input/output schemas, risk levels, and real execution handlers.
 """

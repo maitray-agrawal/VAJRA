@@ -1,4 +1,4 @@
-# Industrial CrisisOps — Strict Architectural & Coding Rules
+# VAJRA — Strict Architectural & Coding Rules
 
 ## 1. Safety & Physical Actuation Guardrails
 - **STRICT SAFETY MANDATE**: LLM outputs must **NEVER** directly actuate physical machinery or perform un-gated destructive database/system actions.

@@ -3,7 +3,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "Industrial CrisisOps"
+    PROJECT_NAME: str = "VAJRA"
     VERSION: str = "0.1.0"
     API_V1_STR: str = "/api"
     ENV: str = "development"

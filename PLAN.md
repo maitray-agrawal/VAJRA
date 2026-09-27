@@ -1,7 +1,7 @@
-# Industrial CrisisOps — Phased Execution Plan
+# VAJRA — Phased Execution Plan
 
 ## Executive Overview
-Industrial CrisisOps is an AI-powered industrial incident investigation and response platform built for a 24-hour hackathon MVP. This document defines the step-by-step phased roadmap for developing, testing, and demonstrating the platform.
+VAJRA is an agentic industrial incident investigation, adaptive recovery, and auditable decision-making platform. This document defines the step-by-step phased roadmap for developing, testing, and demonstrating the platform.
 
 ---
 

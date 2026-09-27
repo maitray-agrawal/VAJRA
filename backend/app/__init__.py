@@ -1,2 +1,2 @@
-# Industrial CrisisOps Backend Package
+# VAJRA Backend Package
 __version__ = "0.1.0"

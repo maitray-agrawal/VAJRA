@@ -60,10 +60,10 @@ export const Layout: React.FC<LayoutProps> = ({
       {/* Sidebar Navigation */}
       <aside className="sidebar">
         <div className="sidebar-header">
-          <div className="sidebar-logo">CO</div>
+          <div className="sidebar-logo">VJ</div>
           <div>
-            <div className="sidebar-brand-title">CrisisOps</div>
-            <div className="sidebar-brand-sub">AI Command Center</div>
+            <div className="sidebar-brand-title">VAJRA</div>
+            <div className="sidebar-brand-sub">Agentic Industrial Crisis Response</div>
           </div>
         </div>
 

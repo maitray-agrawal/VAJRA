@@ -1,6 +1,6 @@
-# Industrial CrisisOps — Production Deployment Guide
+# VAJRA — Production Deployment Guide
 
-This document provides complete, step-by-step instructions for deploying **Industrial CrisisOps** to [Render](https://render.com) (or any containerized cloud platform).
+This document provides complete, step-by-step instructions for deploying **VAJRA** to [Render](https://render.com) (or any containerized cloud platform).
 
 ---
 
@@ -8,9 +8,9 @@ This document provides complete, step-by-step instructions for deploying **Indus
 
 ```
                           ┌───────────────────────────────┐
-                          │   Render Static Site           │
+                          │   Render Static Site          │
                           │   (React 18 + Vite 5 SPA)     │
-                          │   https://<frontend>.onrender.com│
+                          │   <NEW_VAJRA_FRONTEND_URL>    │
                           └──────────────┬────────────────┘
                                          │
                                    HTTPS / REST API
@@ -19,7 +19,7 @@ This document provides complete, step-by-step instructions for deploying **Indus
                           ┌───────────────────────────────┐
                           │   Render Web Service          │
                           │   (FastAPI / Uvicorn)         │
-                          │   https://<backend>.onrender.com │
+                          │   https://crisisops-api.onrender.com │
                           └──────────────┬────────────────┘
                                          │
                                    SQLite Engine
@@ -45,13 +45,13 @@ Render Blueprints allow deploying the entire stack in one click using the reposi
 1. Push your latest code to GitHub: `git push origin main`.
 2. Log in to [Render Dashboard](https://dashboard.render.com).
 3. Click **New +** → **Blueprint**.
-4. Connect your GitHub repository (`CrisisOps`).
+4. Connect your GitHub repository (`VAJRA`).
 
 ### Step 2: Approve & Deploy
 1. Render will automatically detect `render.yaml`.
 2. Review the detected services:
-   - `crisisops-backend` (Python Web Service)
-   - `crisisops-frontend` (Static Site)
+   - `crisisops-api` (Python Web Service)
+   - `vajra` (Static Site)
 3. Click **Apply**.
 4. Render will build and deploy both services automatically.
 
@@ -66,7 +66,7 @@ If deploying manually without Blueprint:
 | Configuration Field | Value |
 | :--- | :--- |
 | **Service Type** | Web Service |
-| **Name** | `crisisops-backend` |
+| **Name** | `crisisops-api` |
 | **Environment** | Python |
 | **Root Directory** | `backend` |
 | **Build Command** | `pip install -r requirements.txt` |
@@ -79,7 +79,7 @@ If deploying manually without Blueprint:
 | `ENV` | `production` | Enables production runtime mode |
 | `DEBUG` | `False` | Disables debug logs & stack trace leak |
 | `DATABASE_URL` | `sqlite:///./crisisops.db` | Local SQLite database file path |
-| `CORS_ORIGINS` | `https://crisisops-frontend.onrender.com` | Allowed CORS origins (or `*`) |
+| `CORS_ORIGINS` | `<NEW_VAJRA_FRONTEND_URL>` | Allowed CORS origins (or `*`) |
 
 ---
 
@@ -88,7 +88,7 @@ If deploying manually without Blueprint:
 | Configuration Field | Value |
 | :--- | :--- |
 | **Service Type** | Static Site |
-| **Name** | `crisisops-frontend` |
+| **Name** | `vajra` |
 | **Environment** | Static |
 | **Root Directory** | `frontend` |
 | **Build Command** | `npm install && npm run build` |
@@ -103,13 +103,13 @@ Add a rewrite rule under **Redirects/Rewrites**:
 #### Frontend Environment Variables
 | Variable Name | Value | Purpose |
 | :--- | :--- | :--- |
-| `VITE_API_URL` | `https://crisisops-backend.onrender.com` | Target URL of backend Web Service |
+| `VITE_API_URL` | `https://crisisops-api.onrender.com` | Target URL of backend Web Service |
 
 ---
 
 ## 🗄️ Database Seeding & Deterministic State
 
-* **Fresh Instance Startup**: When `crisisops-backend` starts for the first time, `app/main.py` detects an empty database and automatically executes `seed_database_if_empty()`.
+* **Fresh Instance Startup**: When `crisisops-api` starts for the first time, `app/main.py` detects an empty database and automatically executes `seed_database_if_empty()`.
 * **Seeded Assets**:
   - Machines: `M-204` (Hydraulic Drive - Critical), `M-101`, `M-305`.
   - Active Incident: `INC-M204-001` (Bearing Temperature Spikes & High Vibration).
@@ -125,22 +125,22 @@ Run these cURL requests against your deployed backend URL:
 
 ### 1. Health Check
 ```bash
-curl -s https://crisisops-backend.onrender.com/api/health
+curl -s https://crisisops-api.onrender.com/api/health
 ```
 **Expected Response**:
 ```json
-{"status":"ok","app":"Industrial CrisisOps","version":"0.1.0","environment":"production"}
+{"status":"ok","app":"VAJRA","version":"0.1.0","environment":"production"}
 ```
 
 ### 2. Fleet Machine List
 ```bash
-curl -s https://crisisops-backend.onrender.com/api/machines
+curl -s https://crisisops-api.onrender.com/api/machines
 ```
 **Expected Response**: JSON array containing 3 machines (`M-204`, `M-101`, `M-305`).
 
 ### 3. Actuation Safety Invariant Verification
 ```bash
-curl -X POST https://crisisops-backend.onrender.com/api/incidents/INC-M204-001/execute-actuation
+curl -X POST https://crisisops-api.onrender.com/api/incidents/INC-M204-001/execute-actuation
 ```
 **Expected Response**: HTTP 403 Forbidden (`Human approval required prior to physical actuation`).
 

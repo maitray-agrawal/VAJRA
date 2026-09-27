@@ -1,5 +1,5 @@
 """
-CrisisOps Agent Runtime & Controller
+VAJRA Agent Runtime & Controller
 Implements dynamic tool selection, stateful execution loop, intermediate outcome evaluation,
 failure handling, adaptive replanning, and goal verification.
 """
@@ -14,7 +14,7 @@ from app.models.models import Incident, Machine, Evidence, ActionRecommendation
 from app.services.tool_registry import tool_registry, ToolDefinition
 from app.services.audit_service import AuditService
 
-logger = logging.getLogger("crisisops.agent_runtime")
+logger = logging.getLogger("vajra.agent_runtime")
 
 
 class IterationTrace(BaseModel):

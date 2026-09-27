@@ -1,6 +1,6 @@
 # Architectural Decision Records (ADRs)
 
-This document records the architectural decisions made for **Industrial CrisisOps**.
+This document records the architectural decisions made for **VAJRA**.
 
 ---
 

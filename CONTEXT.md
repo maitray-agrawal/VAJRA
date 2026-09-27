@@ -1,9 +1,11 @@
-# Industrial CrisisOps — Permanent Project Context
+# VAJRA — Permanent Project Context
 
 ## Product Identity
-- **Name**: Industrial CrisisOps
-- **Type**: Hackathon-Grade AI-Powered Industrial Incident Investigation and Response Platform
-- **Purpose**: Rapidly detect industrial equipment anomalies, correlate operational signals with historical maintenance logs, identify probable root causes, calculate financial/production impact, retrieve relevant Standard Operating Procedures (SOPs), and recommend human-gated response plans.
+- **Name**: VAJRA
+- **Full Name**: VAJRA — Agentic Industrial Crisis Response
+- **Tagline**: Observe. Decide. Act. Adapt. Recover.
+- **Type**: Agentic AI Platform for Industrial Incident Investigation and Autonomous Recovery
+- **Purpose**: Rapidly detect industrial equipment anomalies, dynamically select diagnostic tools, correlate operational signals with historical maintenance logs, identify probable root causes, calculate financial/production impact, retrieve relevant Standard Operating Procedures (SOPs), adapt strategy upon failure, and recommend policy-gated response plans with outcome verification.
 
 ---
 

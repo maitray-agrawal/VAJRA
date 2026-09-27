@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.services.agent_runtime import agent_runtime, AgentState
 
-logger = logging.getLogger("crisisops.orchestrator")
+logger = logging.getLogger("vajra.orchestrator")
 
 
 class MultiAgentOrchestrator:

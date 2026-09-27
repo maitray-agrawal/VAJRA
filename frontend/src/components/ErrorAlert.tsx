@@ -10,7 +10,7 @@ interface ErrorAlertProps {
 
 export const ErrorAlert: React.FC<ErrorAlertProps> = ({
   message,
-  service = 'CrisisOps API',
+  service = 'VAJRA API',
   statusCode,
   onRetry
 }) => {

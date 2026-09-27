@@ -1,5 +1,5 @@
 """
-Comprehensive Unit & Integration Tests for CrisisOps Agent Runtime.
+Comprehensive Unit & Integration Tests for VAJRA Agent Runtime.
 Tests:
 1. Dynamic tool selection based on agent state.
 2. Prevention of redundant failed action re-execution.

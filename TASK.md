@@ -1,4 +1,4 @@
-# Task Checklist — Industrial CrisisOps
+# Task Checklist — VAJRA
 
 ## Phase 1: Foundation (COMPLETED)
 - [x] Create project structure (`backend/` and `frontend/`)

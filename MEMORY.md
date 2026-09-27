@@ -1,9 +1,9 @@
-# Industrial CrisisOps — Durable Project Memory
+# VAJRA — Durable Project Memory
 
 ## Project Core Facts
-- **Project Name**: Industrial CrisisOps
+- **Project Name**: VAJRA — Agentic Industrial Crisis Response
 - **Workspace Path**: `d:\CrisisOps`
-- **Application Type**: AI-Powered Industrial Incident Investigation Platform (Hackathon MVP)
+- **Application Type**: Agentic Industrial Incident Investigation & Autonomous Recovery Platform
 - **Primary Persona**: Industrial Operations Engineer / Maintenance Supervisor
 
 ---

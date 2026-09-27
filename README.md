@@ -1,10 +1,8 @@
-# CrisisOps
+# VAJRA
 
-## Agentic Industrial Incident Investigation & Autonomous Recovery
+## Agentic Industrial Crisis Response
 
-CrisisOps is an agentic AI system that investigates industrial incidents, dynamically selects diagnostic tools, evaluates evidence, recommends policy-controlled recovery actions, adapts when interventions fail, and verifies the resulting system state.
-
-> **Positioning & Operational Scope**: Autonomous investigation and adaptive decision-making with policy-controlled simulated actuation. All physical/industrial actuation is simulated and policy-controlled.
+> Agentic AI platform for industrial incident investigation, adaptive recovery, and auditable decision-making.
 
 [![Python 3.14](https://img.shields.io/badge/Python-3.14-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115.0-009688.svg)](https://fastapi.tiangolo.com/)
@@ -17,9 +15,17 @@ CrisisOps is an agentic AI system that investigates industrial incidents, dynami
 
 ---
 
+### Live Deployment & Access
+
+* **Live Demo (Frontend)**: [<NEW_VAJRA_FRONTEND_URL>](<NEW_VAJRA_FRONTEND_URL>)
+* **Backend API**: [https://crisisops-api.onrender.com](https://crisisops-api.onrender.com) (API Docs: [https://crisisops-api.onrender.com/docs](https://crisisops-api.onrender.com/docs))
+* **Repository**: [https://github.com/maitray-agrawal/VAJRA](https://github.com/maitray-agrawal/VAJRA)
+
+---
+
 ### The Agentic Loop
 
-CrisisOps executes an autonomous closed-loop agent runtime:
+VAJRA executes an autonomous closed-loop agent runtime:
 
 ```
 Goal
@@ -71,7 +77,7 @@ Modern manufacturing and chemical processing facilities generate thousands of se
 
 ## 🛡️ Key System Architecture & Multi-Agent Intelligence
 
-Industrial CrisisOps solves these challenges through a deterministic, explainable 4-stage agent pipeline combined with a non-bypassable human approval safety gate and cryptographic SHA-256 ledger chaining.
+VAJRA solves these challenges through a deterministic, explainable agent runtime combined with a non-bypassable human approval safety gate and cryptographic SHA-256 ledger chaining.
 
 ```mermaid
 flowchart TD
@@ -106,7 +112,7 @@ flowchart TD
 
 ## 🔄 10-Step Incident Lifecycle
 
-Industrial CrisisOps governs every industrial emergency through a deterministic 10-step lifecycle:
+VAJRA governs every industrial emergency through a deterministic 10-step lifecycle:
 
 ```mermaid
 sequenceDiagram
@@ -211,7 +217,7 @@ const isValid = computedHash === log.current_hash;
 
 ## 🔒 Server-Side Safety Invariant & Zero-Trust Actuation
 
-Industrial CrisisOps enforces a hard server-side invariant in `backend/app/services/actuation_engine.py`. Autonomous machine state modifications without explicit human authorization are physically impossible at the API layer.
+VAJRA enforces a hard server-side invariant in `backend/app/services/actuation_engine.py`. Autonomous machine state modifications without explicit human authorization are physically impossible at the API layer.
 
 ### Core Actuation Safety Invariant (`actuation_engine.py`)
 
@@ -304,7 +310,7 @@ pytest backend/tests -v
 ```
 ============================== test session starts ==============================
 platform win32 -- Python 3.14.0a4, pytest-8.3.4, pluggy-1.5.0
-rootdir: d:\CrisisOps
+rootdir: d:\VAJRA
 collected 38 items
 
 backend/tests/test_actuation_engine.py ........                         [ 21%]
@@ -346,8 +352,8 @@ dist/assets/index-yw0xuABz.js   228.18 kB │ gzip: 64.07 kB
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/maitray-agrawal/CrisisOps.git
-cd CrisisOps
+git clone https://github.com/maitray-agrawal/VAJRA.git
+cd VAJRA
 ```
 
 ### 2. Backend Setup
@@ -388,7 +394,7 @@ npm run dev
 ## 📂 Repository Directory Structure
 
 ```
-CrisisOps/
+VAJRA/
 ├── backend/
 │   ├── app/
 │   │   ├── agents/
@@ -473,5 +479,5 @@ This project is open-source software licensed under the [MIT License](LICENSE).
 ---
 
 <p align="center">
-  <b>Industrial CrisisOps</b> — Engineered for Operational Resilience, Explainable Intelligence, and Zero-Trust Industrial Safety.
+  <b>VAJRA</b> — Engineered for Operational Resilience, Explainable Intelligence, and Zero-Trust Industrial Safety.
 </p>

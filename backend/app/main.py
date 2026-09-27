@@ -13,9 +13,9 @@ with SessionLocal() as db_session:
     seed_database_if_empty(db_session)
 
 app = FastAPI(
-    title=settings.PROJECT_NAME,
+    title="VAJRA API",
     version=settings.VERSION,
-    description="Industrial CrisisOps API — AI-Powered Incident Investigation & Response Platform",
+    description="Agentic Industrial Crisis Response API",
     docs_url="/docs",
     redoc_url="/redoc"
 )

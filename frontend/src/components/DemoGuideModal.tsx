@@ -298,7 +298,7 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
                   Core Value Proposition
                 </div>
                 <p style={{ fontSize: '0.95rem', color: '#fff', lineHeight: '1.55', margin: 0, fontWeight: 500 }}>
-                  "Industrial CrisisOps is the mission-control AI command center that transforms high-frequency plant telemetry into grounded, explainable incident response—strictly bounded by human-in-the-loop authorization and tamper-evident SHA-256 cryptographic auditability."
+                  "VAJRA is the agentic industrial crisis response platform that transforms high-frequency plant telemetry into grounded, explainable incident investigation and adaptive recovery—strictly bounded by human-in-the-loop authorization and tamper-evident SHA-256 cryptographic auditability."
                 </p>
               </div>
 

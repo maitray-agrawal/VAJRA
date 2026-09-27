@@ -1,8 +1,8 @@
-# Industrial CrisisOps — Technical Architecture Specification
+# VAJRA — Technical Architecture Specification
 
 ## 1. System Architecture Overview
 
-Industrial CrisisOps is built as a highly robust, low-latency, modular monolith optimized for rapid 24-hour hackathon execution and high-impact live demonstration.
+VAJRA is built as a highly robust, low-latency, modular monolith optimized for rapid execution and high-impact live demonstration.
 
 ```
 +-----------------------------------------------------------------------------------+

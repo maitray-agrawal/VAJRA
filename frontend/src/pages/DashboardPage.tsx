@@ -184,7 +184,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <div style={{ color: 'var(--accent-cyan)' }}><CpuIcon size={24} /></div>
             <div>
-              <div style={{ fontWeight: 700, color: 'var(--accent-cyan)', fontSize: '0.95rem' }}>CrisisOps Decision Support Shortcuts</div>
+              <div style={{ fontWeight: 700, color: 'var(--accent-cyan)', fontSize: '0.95rem' }}>VAJRA Decision Support Shortcuts</div>
               <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Direct AI investigation workflows for shift operators</div>
             </div>
           </div>
