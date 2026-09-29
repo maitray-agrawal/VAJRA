@@ -3,6 +3,7 @@ import { apiService } from '../services/api';
 import { DemoGuideModal } from './DemoGuideModal';
 import { AppearanceControl } from './AppearanceControl';
 import { CommandPaletteModal } from './CommandPaletteModal';
+import { VajraLogo, AstraXLogo } from '../brand';
 import {
   SearchIcon,
   ActivityIcon,
@@ -93,10 +94,13 @@ export const Layout: React.FC<LayoutProps> = ({
       {/* Sidebar Navigation */}
       <aside className={`sidebar ${isMobileSidebarOpen ? 'open' : ''}`} aria-label="Operations Navigation Rail">
         <div className="sidebar-header">
-          <div className="sidebar-logo">V</div>
+          <div className="sidebar-brand-mark">
+            <VajraLogo size={36} variant="transparent" />
+          </div>
           <div style={{ flex: 1, minWidth: 0 }}>
             <div className="sidebar-brand-title">VAJRA</div>
-            <div className="sidebar-brand-sub">Agentic Industrial Crisis Response</div>
+            <div className="sidebar-brand-sub">CRISIS INTELLIGENCE</div>
+            <div className="sidebar-brand-attribution">AN ASTRA X INTELLIGENCE SYSTEM</div>
           </div>
           {isMobileSidebarOpen && (
             <button
@@ -206,15 +210,20 @@ export const Layout: React.FC<LayoutProps> = ({
             <span>{systemHealthy === false ? 'Connection degraded' : 'Operational'}</span>
           </div>
 
-          <div style={{ color: 'var(--text-primary)', fontWeight: 500, fontSize: '0.78rem' }}>Plant B — Main Line</div>
+          <div style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.78rem' }}>Plant B — Main Line</div>
           <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '2px' }}>Mode: Human-in-the-Loop</div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', marginTop: '0.65rem', paddingTop: '0.65rem', borderTop: '1px solid var(--border)', fontSize: '0.68rem', color: 'var(--text-muted)' }}>
+            <AstraXLogo size={14} variant="transparent" iconOnly />
+            <span>VAJRA · An AstraX System</span>
+          </div>
 
           <button
             onClick={() => setIsDemoGuideOpen(true)}
             className="btn btn-outline"
             style={{
               width: '100%',
-              marginTop: '0.75rem',
+              marginTop: '0.65rem',
               height: '32px',
               fontSize: '0.75rem',
               color: 'var(--text-secondary)'

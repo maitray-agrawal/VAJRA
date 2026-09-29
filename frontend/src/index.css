@@ -5,47 +5,59 @@
    ========================================================================== */
 
 :root {
-  --bg-base:              #FDF7EC;
+  /* AstraX Master Core Palette */
+  --astra-ivory:          #FDF7EC;
+  --astra-sandstone:      #EADDCB;
+  --astra-ink:            #221B14;
+  --astra-copper:         #B87333;
+  --astra-indigo:         #1E3A8A;
+  --astra-vermilion:      #DC2626;
+  --astra-ochre:          #CA8A04;
+  --astra-forest-green:   #166534;
+
+  /* Semantic Theme Tokens: Light (Ivory & Sandstone) */
+  --bg-base:              var(--astra-ivory);
   --bg-surface:           #FFFFFF;
-  --bg-surface-secondary: #F5EFE3;
-  --bg-surface-tertiary:  #EADDCB;
+  --bg-surface-secondary: #F6EFE3;
+  --bg-surface-tertiary:  var(--astra-sandstone);
   --bg-surface-elevated:  #FFFFFF;
-  --bg-sidebar:           #F5EFE3;
+  --bg-sidebar:           #F6EFE3;
   --bg-header:            #FFFFFF;
   --border:               #D9D0C4;
   --border-strong:        #C5BAB0;
   --border-color:         #D9D0C4;
   --border-subtle:        #EDE6DA;
-  --text-primary:         #1F2A37;
+  --text-primary:         var(--astra-ink);
   --text-secondary:       #4B5563;
   --text-muted:           #7D7062;
   --text-disabled:        #ADA49A;
-  --text-main:            #1F2A37;
+  --text-main:            var(--astra-ink);
   --text-bright:          #111827;
   --text-dim:             #7D7062;
-  --astrax-copper:        #B87333;
+  --astrax-copper:        var(--astra-copper);
+  --astrax-indigo:        var(--astra-indigo);
   --copper-tint:          rgba(184, 115, 51, 0.10);
   --copper-border:        rgba(184, 115, 51, 0.28);
-  --accent:               #B87333;
-  --accent-primary:       #B87333;
+  --accent:               var(--astra-copper);
+  --accent-primary:       var(--astra-copper);
   --accent-tint:          rgba(184, 115, 51, 0.10);
   --accent-subtle:        rgba(184, 115, 51, 0.08);
-  --status-normal:        #15803D;
-  --success:              #15803D;
-  --success-bg:           rgba(21, 128, 61, 0.08);
-  --success-border:       rgba(21, 128, 61, 0.22);
-  --status-warning:       #B45309;
-  --warning:              #B45309;
-  --warning-bg:           rgba(180, 83, 9, 0.08);
-  --warning-border:       rgba(180, 83, 9, 0.22);
-  --status-critical:      #DC2626;
-  --critical:             #DC2626;
+  --status-normal:        var(--astra-forest-green);
+  --success:              var(--astra-forest-green);
+  --success-bg:           rgba(22, 101, 52, 0.08);
+  --success-border:       rgba(22, 101, 52, 0.25);
+  --status-warning:       var(--astra-ochre);
+  --warning:              var(--astra-ochre);
+  --warning-bg:           rgba(202, 138, 4, 0.08);
+  --warning-border:       rgba(202, 138, 4, 0.25);
+  --status-critical:      var(--astra-vermilion);
+  --critical:             var(--astra-vermilion);
   --critical-bg:          rgba(220, 38, 38, 0.07);
   --critical-border:      rgba(220, 38, 38, 0.20);
-  --status-info:          #1D4ED8;
-  --info:                 #1D4ED8;
-  --info-tint:            rgba(29, 78, 216, 0.08);
-  --status-contained:     #15803D;
+  --status-info:          var(--astra-indigo);
+  --info:                 var(--astra-indigo);
+  --info-tint:            rgba(30, 58, 138, 0.08);
+  --status-contained:     var(--astra-forest-green);
   --shadow-subtle:        0 1px 2px rgba(31, 42, 55, 0.06);
   --shadow-elevated:      0 2px 8px rgba(31, 42, 55, 0.08);
   --shadow-modal:         0 12px 32px rgba(31, 42, 55, 0.14);
@@ -53,7 +65,7 @@
   --font-interface:       'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono:            'IBM Plex Mono', ui-monospace, Menlo, monospace;
   --font-sans:            var(--font-interface);
-  --bg-secondary:         #F5EFE3;
+  --bg-secondary:         #F6EFE3;
   --bg-card:              #FFFFFF;
   --radius-sm:        4px;
   --radius-btn:       6px;
@@ -71,25 +83,28 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg-base:              #080A0D;
-    --bg-surface:           #0D1014;
-    --bg-surface-secondary: #12161B;
-    --bg-surface-tertiary:  #171C22;
-    --bg-surface-elevated:  #171C22;
-    --bg-sidebar:           #080A0D;
-    --bg-header:            #0D1014;
-    --border:               #242A31;
-    --border-strong:        #2E3741;
-    --border-color:         #242A31;
-    --border-subtle:        #1A1F26;
-    --text-primary:         #F5F7FA;
+    --bg-base:              #0B0D0F;
+    --bg-surface:           #111417;
+    --bg-surface-secondary: #15191D;
+    --bg-surface-tertiary:  #1C2228;
+    --bg-surface-elevated:  #15191D;
+    --bg-sidebar:           #0B0D0F;
+    --bg-header:            #111417;
+    --bg-secondary:         #15191D;
+    --bg-card:              #111417;
+    --border:               #293038;
+    --border-strong:        #36404A;
+    --border-color:         #293038;
+    --border-subtle:        #1E242B;
+    --text-primary:         #FDF7EC;
     --text-secondary:       #B7BEC8;
     --text-muted:           #7F8995;
     --text-disabled:        #3D4650;
-    --text-main:            #F5F7FA;
+    --text-main:            #FDF7EC;
     --text-bright:          #FFFFFF;
     --text-dim:             #7F8995;
     --astrax-copper:        #C8873D;
+    --astrax-indigo:        #1E3A8A;
     --copper-tint:          rgba(200, 135, 61, 0.12);
     --copper-border:        rgba(200, 135, 61, 0.28);
     --accent:               #C8873D;
@@ -100,17 +115,17 @@
     --success:              #22C55E;
     --success-bg:           rgba(34, 197, 94, 0.10);
     --success-border:       rgba(34, 197, 94, 0.25);
-    --status-warning:       #E07B39;
-    --warning:              #E07B39;
-    --warning-bg:           rgba(224, 123, 57, 0.10);
-    --warning-border:       rgba(224, 123, 57, 0.25);
+    --status-warning:       #CA8A04;
+    --warning:              #CA8A04;
+    --warning-bg:           rgba(202, 138, 4, 0.10);
+    --warning-border:       rgba(202, 138, 4, 0.25);
     --status-critical:      #EF4444;
     --critical:             #EF4444;
     --critical-bg:          rgba(239, 68, 68, 0.10);
     --critical-border:      rgba(239, 68, 68, 0.25);
-    --status-info:          #6285EA;
-    --info:                 #6285EA;
-    --info-tint:            rgba(98, 133, 234, 0.10);
+    --status-info:          #3B82F6;
+    --info:                 #3B82F6;
+    --info-tint:            rgba(59, 130, 246, 0.10);
     --status-contained:     #22C55E;
     --shadow-subtle:        0 2px 8px rgba(0, 0, 0, 0.24);
     --shadow-elevated:      0 4px 16px rgba(0, 0, 0, 0.36);
@@ -119,35 +134,36 @@
 }
 
 [data-theme="dark"] {
-  --bg-base: #080A0D; --bg-surface: #0D1014; --bg-surface-secondary: #12161B;
-  --bg-surface-tertiary: #171C22; --bg-surface-elevated: #171C22;
-  --bg-sidebar: #080A0D; --bg-header: #0D1014;
-  --bg-secondary: #12161B; --bg-card: #0D1014;
-  --border: #242A31; --border-strong: #2E3741; --border-color: #242A31; --border-subtle: #1A1F26;
-  --text-primary: #F5F7FA; --text-secondary: #B7BEC8; --text-muted: #7F8995;
-  --text-disabled: #3D4650; --text-main: #F5F7FA; --text-bright: #FFFFFF; --text-dim: #7F8995;
-  --astrax-copper: #C8873D; --copper-tint: rgba(200,135,61,0.12); --copper-border: rgba(200,135,61,0.28);
+  --bg-base: #0B0D0F; --bg-surface: #111417; --bg-surface-secondary: #15191D;
+  --bg-surface-tertiary: #1C2228; --bg-surface-elevated: #15191D;
+  --bg-sidebar: #0B0D0F; --bg-header: #111417;
+  --bg-secondary: #15191D; --bg-card: #111417;
+  --border: #293038; --border-strong: #36404A; --border-color: #293038; --border-subtle: #1E242B;
+  --text-primary: #FDF7EC; --text-secondary: #B7BEC8; --text-muted: #7F8995;
+  --text-disabled: #3D4650; --text-main: #FDF7EC; --text-bright: #FFFFFF; --text-dim: #7F8995;
+  --astrax-copper: #C8873D; --astrax-indigo: #1E3A8A;
+  --copper-tint: rgba(200,135,61,0.12); --copper-border: rgba(200,135,61,0.28);
   --accent: #C8873D; --accent-primary: #C8873D;
   --accent-tint: rgba(200,135,61,0.12); --accent-subtle: rgba(200,135,61,0.08);
   --status-normal: #22C55E; --success: #22C55E;
   --success-bg: rgba(34,197,94,0.10); --success-border: rgba(34,197,94,0.25);
-  --status-warning: #E07B39; --warning: #E07B39;
-  --warning-bg: rgba(224,123,57,0.10); --warning-border: rgba(224,123,57,0.25);
+  --status-warning: #CA8A04; --warning: #CA8A04;
+  --warning-bg: rgba(202,138,4,0.10); --warning-border: rgba(202,138,4,0.25);
   --status-critical: #EF4444; --critical: #EF4444;
   --critical-bg: rgba(239,68,68,0.10); --critical-border: rgba(239,68,68,0.25);
-  --status-info: #6285EA; --info: #6285EA;
-  --info-tint: rgba(98,133,234,0.10); --status-contained: #22C55E;
+  --status-info: #3B82F6; --info: #3B82F6;
+  --info-tint: rgba(59,130,246,0.10); --status-contained: #22C55E;
   --shadow-subtle: 0 2px 8px rgba(0,0,0,0.24); --shadow-elevated: 0 4px 16px rgba(0,0,0,0.36);
   --shadow-modal: 0 16px 48px rgba(0,0,0,0.56);
 }
 
 [data-theme="light"] {
-  --bg-base: #FDF7EC; --bg-surface: #FFFFFF; --bg-surface-secondary: #F5EFE3;
+  --bg-base: #FDF7EC; --bg-surface: #FFFFFF; --bg-surface-secondary: #F6EFE3;
   --bg-surface-tertiary: #EADDCB; --bg-surface-elevated: #FFFFFF;
-  --bg-sidebar: #F5EFE3; --bg-header: #FFFFFF;
-  --bg-secondary: #F5EFE3; --bg-card: #FFFFFF;
+  --bg-sidebar: #F6EFE3; --bg-header: #FFFFFF;
+  --bg-secondary: #F6EFE3; --bg-card: #FFFFFF;
   --border: #D9D0C4; --border-strong: #C5BAB0; --border-color: #D9D0C4; --border-subtle: #EDE6DA;
-  --text-primary: #1F2A37; --text-secondary: #4B5563; --text-muted: #7D7062;
+  --text-primary: #221B14; --text-secondary: #4B5563; --text-muted: #7D7062;
   --text-disabled: #ADA49A; --text-main: #1F2A37; --text-bright: #111827; --text-dim: #7D7062;
   --astrax-copper: #B87333; --copper-tint: rgba(184,115,51,0.10); --copper-border: rgba(184,115,51,0.28);
   --accent: #B87333; --accent-primary: #B87333;
@@ -206,25 +222,28 @@ code, pre, .mono, .data-value { font-family: var(--font-mono); font-size: 0.92em
 }
 
 .sidebar-header {
-  height: 64px; padding: 0 var(--space-2); border-bottom: 1px solid var(--border);
+  min-height: 72px; padding: 12px var(--space-2); border-bottom: 1px solid var(--border);
   display: flex; align-items: center; gap: 10px; flex-shrink: 0;
 }
 
-.sidebar-logo {
-  width: 32px; height: 32px; background-color: var(--astrax-copper);
-  border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-display); font-weight: 700; color: #FFFFFF;
-  font-size: 1rem; letter-spacing: -0.02em; flex-shrink: 0;
+.sidebar-brand-mark {
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
 }
 
 .sidebar-brand-title {
-  font-family: var(--font-display); font-size: 0.96rem; font-weight: 700;
-  letter-spacing: 0.06em; color: var(--text-primary); line-height: 1.1; text-transform: uppercase;
+  font-family: var(--font-display); font-size: 1.05rem; font-weight: 700;
+  letter-spacing: 0.08em; color: var(--text-primary); line-height: 1.1; text-transform: uppercase;
 }
 
 .sidebar-brand-sub {
-  font-family: var(--font-interface); font-size: 0.64rem; color: var(--text-muted);
-  font-weight: 400; margin-top: 2px; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.04em;
+  font-family: var(--font-interface); font-size: 0.62rem; color: var(--accent);
+  font-weight: 700; margin-top: 2px; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.08em;
+}
+
+.sidebar-brand-attribution {
+  font-family: var(--font-interface); font-size: 0.55rem; color: var(--text-muted);
+  font-weight: 600; margin-top: 2px; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.08em;
 }
 
 .sidebar-nav {
@@ -575,3 +594,106 @@ tr:hover td { background-color: var(--bg-surface-secondary); }
 /* ASTRAX ATTRIBUTION */
 .astrax-attribution { font-family: var(--font-interface); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
 .astrax-attribution strong { color: var(--astrax-copper); font-weight: 600; }
+
+/* ASTRA SUTRA AGENTIC TIMELINE (●────●────●────●────●────●) */
+.agentic-timeline {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  position: relative;
+  margin-bottom: var(--space-3);
+  padding: 8px 0;
+}
+
+@media (max-width: 1100px) {
+  .agentic-timeline {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .agentic-timeline {
+    grid-template-columns: 1fr;
+  }
+}
+
+.timeline-node {
+  background-color: var(--bg-surface-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.15s ease-out;
+}
+
+.timeline-node:hover {
+  border-color: var(--accent);
+}
+
+.timeline-node.active {
+  border-color: var(--accent);
+  background-color: var(--bg-surface-elevated);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.timeline-node.completed {
+  border-color: var(--success-border);
+  background-color: var(--bg-surface);
+}
+
+.timeline-step-index {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.timeline-bindu {
+  width: 9px;
+  height: 9px;
+  transform: rotate(45deg);
+  border: 1.5px solid var(--border-strong);
+  background: var(--bg-surface);
+  display: inline-block;
+  margin-right: 6px;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.timeline-node.completed .timeline-bindu {
+  border-color: var(--success);
+  background-color: var(--success);
+}
+
+.timeline-node.active .timeline-bindu {
+  border-color: var(--accent);
+  background-color: var(--accent);
+}
+
+.timeline-step-time {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.timeline-step-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.timeline-step-desc {
+  font-family: var(--font-interface);
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.35;
+  margin-top: 2px;
+}
+

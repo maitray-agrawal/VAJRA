@@ -180,7 +180,10 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
               className={`timeline-node ${isCurrent ? 'active' : ''} ${isDone ? 'completed' : ''}`}
             >
               <div className="timeline-step-index">
-                <span>{stage.num}</span>
+                <span style={{ display: 'flex', alignItems: 'center' }}>
+                  <span className="timeline-bindu" aria-hidden="true" />
+                  <strong>{stage.num}</strong>
+                </span>
                 <span className="timeline-step-time">{stage.time}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

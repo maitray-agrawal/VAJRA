@@ -1,5 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" rx="6" fill="#0D1014" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
-  <path d="M7 8 L16 25 L25 8" fill="none" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="16" cy="14" r="2" fill="#F5F7FA"/>
+  <rect width="32" height="32" rx="6" fill="#0B0D0F"/>
+  <!-- Central Vertical Axis -->
+  <line x1="16" y1="5" x2="16" y2="25" stroke="#B87333" stroke-width="1.2" stroke-linecap="square"/>
+  <!-- Top Vermilion Spearhead -->
+  <polygon points="16,2 18,5 16,8 14,5" fill="#DC2626"/>
+  <!-- Angular V Wings -->
+  <polyline points="7,14 16,26 25,14" fill="none" stroke="#B87333" stroke-width="1.8" stroke-linejoin="miter" stroke-linecap="square"/>
+  <!-- Razor Blades -->
+  <polygon points="14,23 6,28 12,22" fill="#B87333"/>
+  <polygon points="18,23 26,28 20,22" fill="#B87333"/>
+  <!-- Core Bindu Diamond -->
+  <polygon points="16,18 18.5,20.5 16,23 13.5,20.5" fill="none" stroke="#B87333" stroke-width="1.2"/>
+  <polygon points="16,19.5 17,20.5 16,21.5 15,20.5" fill="#FDF7EC"/>
+  <!-- Wing Diamond Nodes -->
+  <polygon points="7,12 8.5,14 7,16 5.5,14" fill="#B87333"/>
+  <polygon points="25,12 26.5,14 25,16 23.5,14" fill="#B87333"/>
 </svg>
