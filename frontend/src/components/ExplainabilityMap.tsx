@@ -121,7 +121,7 @@ export const ExplainabilityMap: React.FC<ExplainabilityMapProps> = ({ incidentId
 
       {/* Cited SOP Citation Block */}
       {report.cited_sop && (
-        <div style={{ padding: '0.9rem 1rem', backgroundColor: 'rgba(56, 189, 248, 0.05)', border: '1px solid rgba(56, 189, 248, 0.25)', borderRadius: 'var(--radius-sm)' }}>
+        <div style={{ padding: '0.9rem 1rem', backgroundColor: 'var(--copper-tint)', border: '1px solid var(--copper-border)', borderRadius: 'var(--radius-sm)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
             <span style={{ fontSize: '0.72rem', textTransform: 'uppercase', fontWeight: 600, color: 'var(--accent-primary)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
               <BookOpenIcon size={14} /> Grounded SOP Citation ({report.cited_sop.code})

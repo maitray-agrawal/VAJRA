@@ -206,16 +206,16 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
             const isAdapted = trace.status === 'ADAPTED';
 
             const borderColor = isFailed
-              ? 'rgba(239, 68, 68, 0.5)'
+              ? 'var(--critical-border)'
               : isAdapted
-              ? 'rgba(6, 182, 212, 0.5)'
-              : 'rgba(34, 197, 94, 0.35)';
+              ? 'var(--copper-border)'
+              : 'var(--success-border)';
 
             const badgeBg = isFailed
-              ? 'rgba(239, 68, 68, 0.15)'
+              ? 'var(--critical-bg)'
               : isAdapted
-              ? 'rgba(56, 189, 248, 0.12)'
-              : 'rgba(34, 197, 94, 0.15)';
+              ? 'var(--accent-tint)'
+              : 'var(--success-bg)';
 
             const badgeColor = isFailed
               ? 'var(--status-critical)'
@@ -274,16 +274,16 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
 
                   {/* Result Summary */}
                   <div style={{
-                    background: isFailed ? 'rgba(239, 68, 68, 0.08)' : 'rgba(0,0,0,0.25)',
-                    border: `1px solid ${isFailed ? 'rgba(239, 68, 68, 0.25)' : 'rgba(255,255,255,0.05)'}`,
+                    background: isFailed ? 'var(--critical-bg)' : 'var(--bg-surface-secondary)',
+                    border: `1px solid ${isFailed ? 'var(--critical-border)' : 'var(--border)'}`,
                     borderRadius: 'var(--radius-sm)',
                     padding: '0.5rem 0.65rem',
                     marginBottom: '0.5rem'
                   }}>
-                    <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: isFailed ? '#ef4444' : 'var(--text-dim)', fontWeight: 700, marginBottom: '0.2rem' }}>
+                    <div style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: isFailed ? 'var(--critical)' : 'var(--text-dim)', fontWeight: 700, marginBottom: '0.2rem' }}>
                       {isFailed ? 'Execution Failure' : 'Result & Observation'}
                     </div>
-                    <p style={{ fontSize: '0.76rem', color: 'var(--text-bright)', lineHeight: '1.4', margin: 0 }}>
+                    <p style={{ fontSize: '0.76rem', color: 'var(--text-primary)', lineHeight: '1.4', margin: 0 }}>
                       {trace.result_summary}
                     </p>
                   </div>
@@ -291,12 +291,12 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
                   {/* Adaptation Note if present */}
                   {trace.adaptation_note && (
                     <div style={{
-                      backgroundColor: 'rgba(56, 189, 248, 0.08)',
+                      backgroundColor: 'var(--copper-tint)',
                       borderLeft: '3px solid var(--accent-primary)',
                       padding: '0.4rem 0.6rem',
                       borderRadius: '0 var(--radius-sm) var(--radius-sm) 0',
                       fontSize: '0.72rem',
-                      color: 'var(--text-bright)',
+                      color: 'var(--text-primary)',
                       marginBottom: '0.4rem'
                     }}>
                       <div style={{ fontSize: '0.65rem', color: 'var(--accent-primary)', fontWeight: 600, textTransform: 'uppercase' }}>
@@ -366,8 +366,8 @@ export const AgentStepper: React.FC<AgentStepperProps> = ({
       {/* Goal Verification Matrix (Phase 5 requirement) */}
       {verification && (
         <div style={{
-          background: 'rgba(0, 0, 0, 0.3)',
-          border: '1px solid rgba(34, 197, 94, 0.35)',
+          background: 'var(--bg-surface-elevated)',
+          border: '1px solid var(--border-strong)',
           borderRadius: 'var(--radius-md)',
           padding: '1rem'
         }}>

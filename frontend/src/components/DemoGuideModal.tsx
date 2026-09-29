@@ -175,18 +175,8 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
 
   return (
     <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'rgba(0, 0, 0, 0.75)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 99999
-      }}
+      className="modal-overlay"
+      style={{ zIndex: 99999 }}
       onClick={onClose}
     >
       <div
@@ -217,7 +207,7 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
             <div
               style={{
                 background: 'var(--accent-primary)',
-                color: '#080A0D',
+                color: '#FFFFFF',
                 fontWeight: 700,
                 borderRadius: 'var(--radius-sm)',
                 padding: '2px 8px',
@@ -436,7 +426,7 @@ export const DemoGuideModal: React.FC<DemoGuideModalProps> = ({
                         height: '26px',
                         borderRadius: 'var(--radius-sm)',
                         background: idx === currentStepIndex ? 'var(--accent-primary)' : 'var(--bg-surface-elevated)',
-                        color: idx === currentStepIndex ? '#080A0D' : 'var(--text-muted)',
+                        color: idx === currentStepIndex ? '#FFFFFF' : 'var(--text-muted)',
                         fontSize: '0.72rem',
                         fontWeight: 700,
                         display: 'flex',

@@ -181,9 +181,9 @@ export const ReplayPlayer: React.FC<ReplayPlayerProps> = ({ incidentId }) => {
                   fontSize: '0.72rem',
                   fontWeight: 700,
                   cursor: 'pointer',
-                  background: playbackSpeed === s.speed ? 'rgba(56, 189, 248, 0.15)' : 'rgba(255,255,255,0.05)',
+                  background: playbackSpeed === s.speed ? 'var(--accent-tint)' : 'var(--bg-surface-elevated)',
                   color: playbackSpeed === s.speed ? 'var(--accent-primary)' : 'var(--text-muted)',
-                  border: `1px solid ${playbackSpeed === s.speed ? 'var(--border-strong)' : 'transparent'}`
+                  border: `1px solid ${playbackSpeed === s.speed ? 'var(--copper-border)' : 'var(--border)'}`
                 }}
               >
                 {s.label}
@@ -209,11 +209,11 @@ export const ReplayPlayer: React.FC<ReplayPlayerProps> = ({ incidentId }) => {
         {currentStep.details && (
           <pre style={{
             fontSize: '0.75rem',
-            background: 'rgba(0,0,0,0.4)',
-            border: '1px solid rgba(255,255,255,0.06)',
+            background: 'var(--bg-surface-secondary)',
+            border: '1px solid var(--border)',
             padding: '0.75rem',
             borderRadius: 'var(--radius-sm)',
-            color: 'var(--text-bright)',
+            color: 'var(--text-primary)',
             fontFamily: 'var(--font-mono)',
             overflowX: 'auto',
             margin: 0
